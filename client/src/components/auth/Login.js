@@ -19,6 +19,7 @@ const Login = (props) => {
     e.preventDefault();
     login(email, password);
   };
+
   return (
     <div>
       <p className='lead'>

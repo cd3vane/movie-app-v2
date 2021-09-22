@@ -575,3 +575,78 @@ button {
     padding: 0.3rem 0.4rem;
   }
 }
+.img-container {
+  background-color: #7ee9b700;
+  height: 50%;
+  width: 50%;
+  margin: 0 auto;
+  padding-bottom: 30px;
+  max-width: 948px;
+}
+
+img {
+  width: 100%;
+  height: auto;
+}
+
+.content {
+  position: relative;
+}
+
+.watchlist-btn {
+  border: 1px solid #000;
+  width: 40px;
+  height: 40px;
+  border-radius: 100%;
+  margin: 4px;
+  display: inline-block;
+  vertical-align: middle;
+  font-size: 30px;
+  color: rgb(58, 119, 86);
+  position: absolute;
+  box-shadow: #414141;
+  bottom: 5px;
+  right: 5px;
+}
+
+.row {
+  display: -ms-flexbox;
+  display: flex;
+  -ms-flex-wrap: wrap;
+  flex-wrap: wrap;
+  margin-right: -15px;
+  margin-left: -15px;
+  padding-left: 30px;
+  padding-right: 30px;
+}
+
+@media (max-width: 700px) {
+  .row {
+    display: -ms-flexbox;
+    display: flex;
+    -ms-flex-wrap: wrap;
+    flex-wrap: wrap;
+    margin-right: -15px;
+    margin-left: -15px;
+  }
+}
+
+.column {
+  position: relative;
+  width: 100%;
+  padding-right: 15px;
+  padding-left: 15px;
+  padding-bottom: 30px;
+  -ms-flex: 0 0 20%;
+  flex: 0 0 20%;
+  max-width: 20%;
+}
+
+@media (max-width: 700px) {
+  .column {
+    -ms-flex: 0 0 33%;
+    flex: 0 0 33%;
+    max-width: 33%;
+    padding-bottom: 5px;
+  }
+}
