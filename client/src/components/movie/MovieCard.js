@@ -1,6 +1,5 @@
 import React from 'react';
 import Button from '../layout/Button';
-import { MovieControls } from './MovieControls';
 
 const MovieCard = ({ movie, type }) => {
   const IMGPATH = 'https://image.tmdb.org/t/p/w1280';
@@ -18,7 +17,7 @@ const MovieCard = ({ movie, type }) => {
           ''
         )}
       </div>
-      <h3>{movie.title}</h3>
+      <h5>{movie.title}</h5>
     </div>
   );
 };
