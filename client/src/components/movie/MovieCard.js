@@ -1,11 +1,11 @@
-import React from 'react';
+import React, { Fragment } from 'react';
+import { Link } from 'react-router-dom';
 import Button from '../layout/Button';
 
-const MovieCard = ({ movie, type }) => {
+const MovieCard = ({ movie }) => {
   const IMGPATH = 'https://image.tmdb.org/t/p/w1280';
   return (
-    <div className='column'>
-      <div className='overlay'></div>
+    <Fragment>
       <div className='content'>
         <img
           src={`${IMGPATH}${movie.poster_path}`}
@@ -17,8 +17,9 @@ const MovieCard = ({ movie, type }) => {
           ''
         )}
       </div>
+
       <h5>{movie.title}</h5>
-    </div>
+    </Fragment>
   );
 };
 

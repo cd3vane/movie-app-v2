@@ -4,7 +4,7 @@ import { Link } from 'react-router-dom';
 import PropTypes from 'prop-types';
 import { logout } from '../../actions/auth';
 
-const Navbar = ({ logout }) => {
+const Navbar = ({ auth: { isAuthenticated, loading }, logout }) => {
   const authLinks = (
     <ul>
       <li>
@@ -28,7 +28,7 @@ const Navbar = ({ logout }) => {
   return (
     <nav className='navbar bg-dark'>
       <h1>
-        <Link to='/movies'>
+        <Link to={'/movies/1'}>
           <i className='fas fa-code'></i> Movie Shiz
         </Link>
       </h1>
@@ -42,4 +42,8 @@ Navbar.propTypes = {
   auth: PropTypes.object.isRequired
 };
 
-export default connect(null, { logout })(Navbar);
+const mapStateToProps = (state) => ({
+  auth: state.auth
+});
+
+export default connect(mapStateToProps, { logout })(Navbar);

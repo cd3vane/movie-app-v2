@@ -2,65 +2,46 @@ import React, { Fragment, useEffect } from 'react';
 import { BrowserRouter as Router, Route, Switch } from 'react-router-dom';
 import Landing from './components/layout/Landing';
 import Navbar from './components/layout/Navbar';
-import PropTypes from 'prop-types';
-import Register from './components/auth/Register';
+import Routes from './components/routing/Routes';
 import './App.css';
-import CreateProfile from './components/profile-forms/CreateProfile';
 import Alert from './components/layout/Alert';
-import EditProfile from './components/profile-forms/EditProfile';
-import PrivateRoute from './components/routing/PrivateRoute';
-import Dashboard from './components/dashboard/Dashboard';
-import Profiles from './components/profiles/Profiles';
-import Profile from './components/profile/Profile';
-import Movies from './components/movies/Movies';
+import { LOGOUT } from './actions/types';
 
 // Redux imports
-import { connect } from 'react-redux';
 import { loadUser } from './actions/auth';
+import { Provider } from 'react-redux';
 import setAuthToken from './utils/setAuthToken';
 import store from './store';
 
-if (localStorage.token) {
-  setAuthToken(localStorage.token);
-}
-
-function App({ isAuthenticated }) {
+const App = () => {
   useEffect(() => {
+    // check for token in LS
+    if (localStorage.token) {
+      setAuthToken(localStorage.token);
+    }
     store.dispatch(loadUser());
+
+    // log user out from all tabs if they log out in one tab
+    window.addEventListener('storage', () => {
+      if (!localStorage.token) store.dispatch({ type: LOGOUT });
+    });
   }, []);
 
-  const showNav = isAuthenticated;
-
   return (
-    <Router>
-      {showNav && <Navbar />}
-      <Alert />
-      <Route exact path='/' component={Landing} />
-      <section className='container'>
-        <Switch>
-          <Route exact path='/register' component={Register} />
-          <Route exact path='/movies' component={Movies} />
-          <Route exact path='/profiles' component={Profiles} />
-          <Route exact path='/profile/:id' component={Profile} />
-          <PrivateRoute exact path='/dashboard' component={Dashboard} />
-          <PrivateRoute
-            exact
-            path='/create-profile'
-            component={CreateProfile}
-          />
-          <PrivateRoute exact path='/edit-profile' component={EditProfile} />
-        </Switch>
-      </section>
-    </Router>
-  );
-}
+    <Provider store={store}>
+      <Router>
+        <Fragment>
+          <Navbar />
+          <Alert />
 
-App.propTypes = {
-  isAuthenticated: PropTypes.bool
+          <Switch>
+            <Route exact path='/' component={Landing} />
+            <Route component={Routes} />
+          </Switch>
+        </Fragment>
+      </Router>
+    </Provider>
+  );
 };
 
-const mapStateToProps = (state) => ({
-  isAuthenticated: state.auth.isAuthenticated
-});
-
-export default connect(mapStateToProps, {})(App);
+export default App;

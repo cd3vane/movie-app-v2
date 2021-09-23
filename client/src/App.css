@@ -640,3 +640,16 @@ img {
     padding-bottom: 5px;
   }
 }
+
+ul {
+  padding-left: 15px;
+  padding-right: 15px;
+  cursor: pointer;
+}
+
+.pagination a {
+  color: var(--primary-color);
+  float: left;
+  padding: 8px 16px;
+  text-decoration: none;
+}

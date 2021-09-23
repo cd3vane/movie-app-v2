@@ -1,53 +1,48 @@
 import {
-  CLEAR_PROFILE,
-  GET_PROFILE,
-  GET_PROFILES,
-  PROFILE_ERROR,
-  UPDATE_PROFILE
+  CLEAR_MOVIES,
+  GET_MOVIES,
+  GET_MOVIE,
+  MOVIE_ERROR
 } from '../actions/types';
 
 const initialState = {
-  profile: null,
-  profiles: [],
-  repos: [],
+  movie: null,
+  movies: [],
   loading: true,
   error: {}
 };
 
-function profileReducer(state = initialState, action) {
+export default function (state = initialState, action) {
   const { type, payload } = action;
 
   switch (type) {
-    case GET_PROFILE:
-    case UPDATE_PROFILE:
+    case GET_MOVIE:
       return {
         ...state,
-        profile: payload,
+        movie: payload,
         loading: false
       };
-    case GET_PROFILES:
+    case GET_MOVIES:
       return {
         ...state,
-        profiles: payload,
+        movies: payload,
         loading: false
       };
-    case PROFILE_ERROR:
+    case MOVIE_ERROR:
       return {
         ...state,
-        profile: null,
+        movie: null,
         error: payload,
         loading: false
       };
-    case CLEAR_PROFILE:
+    case CLEAR_MOVIES:
       return {
         ...state,
-        profile: null,
-        repos: [],
+        movie: null,
+        movies: [],
         loading: false
       };
     default:
       return state;
   }
 }
-
-export default profileReducer;
