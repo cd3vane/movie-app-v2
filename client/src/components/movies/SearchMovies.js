@@ -1,9 +1,7 @@
-import React, { Fragment, useEffect, useState } from 'react';
+import React, { Fragment, useState } from 'react';
 import Spinner from '../layout/Spinner';
 import { connect } from 'react-redux';
 import MovieList from './MovieList';
-import queryString from 'query-string';
-import { useHistory, useLocation } from 'react-router-dom';
 import { searchMovies } from '../../actions/movie';
 import PropTypes from 'prop-types';
 

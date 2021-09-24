@@ -20,9 +20,6 @@ const PopularMovies = ({
 
   const [currentPage, setCurrentPage] = useState(initialPageNumber);
 
-  const SEARCHAPI =
-    'https://api.themoviedb.org/3/search/movie?&api_key=04c35731a5ee918f014970082a0088b1&query=';
-
   useEffect(() => {
     getPopularMovies(match.params.pageNumber);
     history.push(`${currentPage}`);
@@ -64,7 +61,7 @@ const PopularMovies = ({
 
 PopularMovies.propTypes = {
   getPopularMovies: PropTypes.func.isRequired,
-  movies: PropTypes.object.isRequired
+  movies: PropTypes.array
 };
 
 const mapStateToProps = (state) => ({

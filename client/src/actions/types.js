@@ -25,3 +25,4 @@ export const GET_MOVIES = 'GET_MOVIES';
 export const GET_MOVIE = 'GET_MOVIE';
 export const CLEAR_MOVIES = 'CLEAR_MOVIES';
 export const MOVIE_ERROR = 'MOVIE_ERROR';
+export const UPDATE_WATCHLIST = 'UPDATE_PROFILE';

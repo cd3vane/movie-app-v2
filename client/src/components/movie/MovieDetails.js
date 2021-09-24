@@ -3,17 +3,26 @@ import { connect } from 'react-redux';
 import { Link } from 'react-router-dom';
 import Spinner from '../layout/Spinner';
 import { getMovieById } from '../../actions/movie';
+import { addToWatchlist, getCurrentProfile } from '../../actions/profile';
 import PropTypes from 'prop-types';
 
-const MovieDetails = ({ match, movie: { movie, loading }, getMovieById }) => {
+const MovieDetails = ({
+  match,
+  movie: { movie, loading },
+  getMovieById,
+  addToWatchlist,
+  getCurrentProfile,
+  profile: { profile }
+}) => {
   useEffect(() => {
     getMovieById(match.params.id);
-  }, [getMovieById, match.params.id]);
+    getCurrentProfile();
+  }, [getMovieById, getCurrentProfile, match.params.id]);
   const IMGPATH = 'https://image.tmdb.org/t/p/w1280';
 
   return (
     <Fragment>
-      {movie === null || loading ? (
+      {movie === null || profile === null || loading ? (
         <Spinner />
       ) : (
         <div>
@@ -27,7 +36,9 @@ const MovieDetails = ({ match, movie: { movie, loading }, getMovieById }) => {
           </h3>
           <h1> Synopsis</h1>
           <p>{movie.overview}</p>
-          <button>Add to Watchlist</button>
+          <button onClick={(e) => addToWatchlist(movie.id)}>
+            Add to Watchlist
+          </button>
         </div>
       )}
     </Fragment>
@@ -36,11 +47,19 @@ const MovieDetails = ({ match, movie: { movie, loading }, getMovieById }) => {
 
 MovieDetails.propTypes = {
   movie: PropTypes.object.isRequired,
-  getMovieById: PropTypes.func.isRequired
+  getMovieById: PropTypes.func.isRequired,
+  getCurrentProfile: PropTypes.func.isRequired,
+  addToWatchlist: PropTypes.func.isRequired,
+  profile: PropTypes.object.isRequired
 };
 
 const mapStateToProps = (state) => ({
-  movie: state.movie
+  movie: state.movie,
+  profile: state.profile
 });
 
-export default connect(mapStateToProps, { getMovieById })(MovieDetails);
+export default connect(mapStateToProps, {
+  getMovieById,
+  addToWatchlist,
+  getCurrentProfile
+})(MovieDetails);

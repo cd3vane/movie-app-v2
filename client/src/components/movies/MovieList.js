@@ -4,14 +4,11 @@ import MovieCard from '../movie/MovieCard';
 import PropTypes from 'prop-types';
 
 const MovieList = ({ movies }) => {
-  const SEARCHAPI =
-    'https://api.themoviedb.org/3/search/movie?&api_key=04c35731a5ee918f014970082a0088b1&query=';
-
   return (
     <>
       <div className='row'>
-        {movies.map((movie) => (
-          <div className='column'>
+        {movies.map((movie, index) => (
+          <div key={index} className='column'>
             <Link to={`/movie-details/${movie.id}`}>
               <MovieCard key={movie.id} movie={movie} />
             </Link>
@@ -23,7 +20,7 @@ const MovieList = ({ movies }) => {
 };
 
 MovieList.propTypes = {
-  movies: PropTypes.object.isRequired
+  movies: PropTypes.array.isRequired
 };
 
 export default MovieList;

@@ -3,7 +3,8 @@ import {
   GET_PROFILE,
   GET_PROFILES,
   PROFILE_ERROR,
-  UPDATE_PROFILE
+  UPDATE_PROFILE,
+  UPDATE_WATCHLIST
 } from '../actions/types';
 
 const initialState = {
@@ -30,6 +31,12 @@ function profileReducer(state = initialState, action) {
         profiles: payload,
         loading: false
       };
+    case UPDATE_WATCHLIST:
+      return {
+        ...state,
+        profile: { watchlist: [payload, ...state] }
+      };
+
     case PROFILE_ERROR:
       return {
         ...state,

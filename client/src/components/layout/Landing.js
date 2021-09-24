@@ -1,6 +1,4 @@
 import React from 'react';
-import { Redirect } from 'react-router-dom';
-import PropTypes from 'prop-types';
 import Login from '../auth/Login';
 
 const Landing = () => {

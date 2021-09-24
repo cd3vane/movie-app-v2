@@ -1,11 +1,11 @@
-import { api } from '../utils/api';
+import { api, movieApi } from '../utils/api';
 import { setAlert } from './alert';
 import {
   ACCOUNT_DELETED,
   GET_PROFILE,
   GET_PROFILES,
   PROFILE_ERROR,
-  UPDATE_PROFILE,
+  UPDATE_WATCHLIST,
   CLEAR_PROFILE
 } from './types';
 
@@ -112,18 +112,21 @@ export const deleteAccount = () => async (dispatch) => {
 };
 
 // Add Experience
-export const addToWatchlist = (formData, history) => async (dispatch) => {
+export const addToWatchlist = (movieId) => async (dispatch) => {
   try {
-    const res = await api.put('/profile/experience', formData);
+    const config = {
+      baseURL: `https://api.themoviedb.org/3/movie/${movieId}?api_key=845024cb2f20a2bbaba2bd37eddadafc`
+    };
+    const movie = await movieApi.get('', config);
+
+    const res = await api.put('/profile/watchlist', movie.data);
 
     dispatch({
-      type: UPDATE_PROFILE,
+      type: UPDATE_WATCHLIST,
       payload: res.data
     });
 
-    dispatch(setAlert('Experience Added'));
-
-    history.push('/dashboard');
+    dispatch(setAlert('Movie Added to Watchlist'));
   } catch (err) {
     const errors = err.response.data.errors;
 
