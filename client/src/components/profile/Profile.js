@@ -5,6 +5,7 @@ import ProfileTop from './ProfileTop';
 import ProfileAbout from './ProfileAbout';
 import { connect } from 'react-redux';
 import Spinner from '../layout/Spinner';
+import ProfileWatchlist from './ProfileWatchlist';
 import { getProfileById } from '../../actions/profile';
 
 const Profile = ({
@@ -36,9 +37,10 @@ const Profile = ({
           <div className='profile-grid my-1'>
             <ProfileTop profile={profile} />
             <ProfileAbout profile={profile} />
-            <div className='profile-exp bg-white p-2'>
-              <h2 className='text-primary'>Experience</h2>
-            </div>
+          </div>
+          <div className='watchlist'>
+            <h3>Watchlist</h3>
+            <ProfileWatchlist profile={profile} />
           </div>
         </Fragment>
       )}

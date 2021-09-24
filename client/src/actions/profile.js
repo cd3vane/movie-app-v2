@@ -110,3 +110,30 @@ export const deleteAccount = () => async (dispatch) => {
     }
   }
 };
+
+// Add Experience
+export const addToWatchlist = (formData, history) => async (dispatch) => {
+  try {
+    const res = await api.put('/profile/experience', formData);
+
+    dispatch({
+      type: UPDATE_PROFILE,
+      payload: res.data
+    });
+
+    dispatch(setAlert('Experience Added'));
+
+    history.push('/dashboard');
+  } catch (err) {
+    const errors = err.response.data.errors;
+
+    if (errors) {
+      errors.forEach((error) => dispatch(setAlert(error.msg, 'danger')));
+    }
+
+    dispatch({
+      type: PROFILE_ERROR,
+      payload: { msg: err.response.statusText, status: err.response.status }
+    });
+  }
+};

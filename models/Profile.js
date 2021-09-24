@@ -6,7 +6,8 @@ const ProfileSchema = new mongoose.Schema({
     ref: 'user'
   },
   name: {
-    type: String
+    type: String,
+    required: true
   },
   location: {
     type: String
@@ -17,12 +18,13 @@ const ProfileSchema = new mongoose.Schema({
         type: String,
         required: true
       },
-      link: {
-        type: String,
+      id: {
+        type: Number,
         required: true
       },
-      poster: {
-        type: String
+      poster_path: {
+        type: String,
+        required: true
       },
       date: {
         type: Date,
@@ -30,6 +32,23 @@ const ProfileSchema = new mongoose.Schema({
       }
     }
   ],
+  social: {
+    youtube: {
+      type: String
+    },
+    twitter: {
+      type: String
+    },
+    facebook: {
+      type: String
+    },
+    linkedin: {
+      type: String
+    },
+    instagram: {
+      type: String
+    }
+  },
   bio: {
     type: String
   },

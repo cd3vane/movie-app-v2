@@ -25,6 +25,30 @@ export const getPopularMovies = (pageNumber) => async (dispatch) => {
   }
 };
 
+// Search movies
+export const searchMovies = (title) => async (dispatch) => {
+  dispatch({ type: CLEAR_MOVIES });
+  try {
+    const config = {
+      baseURL:
+        'https://api.themoviedb.org/3/search/movie?&api_key=04c35731a5ee918f014970082a0088b1&query=' +
+        `${title}`
+    };
+
+    const res = await movieApi.get('', config);
+
+    dispatch({
+      type: GET_MOVIES,
+      payload: res.data.results
+    });
+  } catch (err) {
+    dispatch({
+      type: MOVIE_ERROR,
+      payload: { msg: err.response.statusText, status: err.response.status }
+    });
+  }
+};
+
 // Get profile by id
 export const getMovieById = (id) => async (dispatch) => {
   try {

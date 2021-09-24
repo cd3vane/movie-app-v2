@@ -11,11 +11,6 @@ const MovieCard = ({ movie }) => {
           src={`${IMGPATH}${movie.poster_path}`}
           alt='No image in database'
         />
-        {movie.poster_path != null ? (
-          <Button text='+' name='watchlist-btn' />
-        ) : (
-          ''
-        )}
       </div>
 
       <h5>{movie.title}</h5>
