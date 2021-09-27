@@ -1,18 +1,14 @@
 import React, { Fragment, useEffect } from 'react';
 import Spinner from '../layout/Spinner';
 import { connect } from 'react-redux';
-import { getProfileById } from '../../actions/profile';
+import { getCurrentProfile } from '../../actions/profile';
 import MovieList from '../movies/MovieList';
 import PropTypes from 'prop-types';
 
-const Watchlist = ({
-  match,
-  getProfileById,
-  profile: { profile, loading }
-}) => {
+const Watchlist = ({ getCurrentProfile, profile: { profile, loading } }) => {
   useEffect(() => {
-    getProfileById(match.params.id);
-  }, [getProfileById, match.params.id]);
+    getCurrentProfile();
+  }, [getCurrentProfile]);
 
   return (
     <>
@@ -32,7 +28,7 @@ const Watchlist = ({
 };
 
 Watchlist.propTypes = {
-  getProfileById: PropTypes.func.isRequired,
+  getCurrentProfile: PropTypes.func.isRequired,
   profile: PropTypes.object.isRequired
 };
 
@@ -40,4 +36,4 @@ const mapStateToProps = (state) => ({
   profile: state.profile
 });
 
-export default connect(mapStateToProps, { getProfileById })(Watchlist);
+export default connect(mapStateToProps, { getCurrentProfile })(Watchlist);

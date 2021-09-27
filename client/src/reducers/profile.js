@@ -4,7 +4,8 @@ import {
   GET_PROFILES,
   PROFILE_ERROR,
   UPDATE_PROFILE,
-  UPDATE_WATCHLIST
+  UPDATE_WATCHLIST,
+  REMOVE_FROM_WATCHLIST
 } from '../actions/types';
 
 const initialState = {
@@ -32,9 +33,21 @@ function profileReducer(state = initialState, action) {
         loading: false
       };
     case UPDATE_WATCHLIST:
+      let watchlist = [...state.profile.watchlist];
+      watchlist.push(payload);
       return {
         ...state,
-        profile: { watchlist: [payload, ...state] }
+        profile: { watchlist }
+      };
+    case REMOVE_FROM_WATCHLIST:
+      return {
+        ...state,
+        profile: {
+          watchlist: state.profile.watchlist.filter(
+            (movie) => movie.id !== payload
+          )
+        },
+        loading: false
       };
 
     case PROFILE_ERROR:

@@ -179,11 +179,14 @@ router.put(
   }
 );
 
+// @route    DELETE api/profile/watchlist/:movie_id
+// @desc     Add movie to watchlist
+// @access   Private
 router.delete('/watchlist/:movie_id', auth, async (req, res) => {
   try {
     const foundProfile = await Profile.findOne({ user: req.user.id });
     foundProfile.watchlist = foundProfile.watchlist.filter(
-      (movie) => movie._id.toString() !== req.params.movie_id
+      (movie) => movie.id.toString() !== req.params.movie_id
     );
     await foundProfile.save();
     return res.status(200).json(foundProfile);

@@ -5,7 +5,7 @@ import ProfileTop from './ProfileTop';
 import ProfileAbout from './ProfileAbout';
 import { connect } from 'react-redux';
 import Spinner from '../layout/Spinner';
-import ProfileWatchlist from './ProfileWatchlist';
+import PreviewWatchlist from './PreviewWatchlist';
 import { getProfileById } from '../../actions/profile';
 
 const Profile = ({
@@ -40,7 +40,7 @@ const Profile = ({
           </div>
           <div className='watchlist'>
             <h3>Watchlist</h3>
-            <ProfileWatchlist profile={profile} />
+            <PreviewWatchlist profile={profile} />
           </div>
         </Fragment>
       )}

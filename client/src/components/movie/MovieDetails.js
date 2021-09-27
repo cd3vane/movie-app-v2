@@ -3,14 +3,20 @@ import { connect } from 'react-redux';
 import { Link } from 'react-router-dom';
 import Spinner from '../layout/Spinner';
 import { getMovieById } from '../../actions/movie';
-import { addToWatchlist, getCurrentProfile } from '../../actions/profile';
+import {
+  addToWatchlist,
+  removeFromWatchlist,
+  getCurrentProfile
+} from '../../actions/profile';
 import PropTypes from 'prop-types';
 
 const MovieDetails = ({
   match,
+  history,
   movie: { movie, loading },
   getMovieById,
   addToWatchlist,
+  removeFromWatchlist,
   getCurrentProfile,
   profile: { profile }
 }) => {
@@ -19,6 +25,17 @@ const MovieDetails = ({
     getCurrentProfile();
   }, [getMovieById, getCurrentProfile, match.params.id]);
   const IMGPATH = 'https://image.tmdb.org/t/p/w1280';
+
+  const isInWatchlist = (watchlist, movie) => {
+    if (watchlist.length > 0) {
+      for (let i = 0; i < watchlist.length; i++) {
+        if (watchlist[i].title === movie.title) {
+          return true;
+        }
+      }
+      return false;
+    }
+  };
 
   return (
     <Fragment>
@@ -36,9 +53,15 @@ const MovieDetails = ({
           </h3>
           <h1> Synopsis</h1>
           <p>{movie.overview}</p>
-          <button onClick={(e) => addToWatchlist(movie.id)}>
-            Add to Watchlist
-          </button>
+          {isInWatchlist(profile.watchlist, movie) ? (
+            <button onClick={(e) => removeFromWatchlist(movie.id, history)}>
+              Remove from Watchlist
+            </button>
+          ) : (
+            <button onClick={(e) => addToWatchlist(movie.id, history)}>
+              Add to Watchlist
+            </button>
+          )}
         </div>
       )}
     </Fragment>
@@ -50,6 +73,7 @@ MovieDetails.propTypes = {
   getMovieById: PropTypes.func.isRequired,
   getCurrentProfile: PropTypes.func.isRequired,
   addToWatchlist: PropTypes.func.isRequired,
+  removeFromWatchlist: PropTypes.func.isRequired,
   profile: PropTypes.object.isRequired
 };
 
@@ -61,5 +85,6 @@ const mapStateToProps = (state) => ({
 export default connect(mapStateToProps, {
   getMovieById,
   addToWatchlist,
+  removeFromWatchlist,
   getCurrentProfile
 })(MovieDetails);
