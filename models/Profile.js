@@ -1,8 +1,9 @@
 const mongoose = require('mongoose');
+const Schema = mongoose.Schema;
 
-const ProfileSchema = new mongoose.Schema({
+const ProfileSchema = new Schema({
   user: {
-    type: mongoose.Schema.Types.ObjectId,
+    type: Schema.Types.ObjectId,
     ref: 'user'
   },
   name: {
@@ -12,26 +13,6 @@ const ProfileSchema = new mongoose.Schema({
   location: {
     type: String
   },
-  watchlist: [
-    {
-      title: {
-        type: String,
-        required: true
-      },
-      id: {
-        type: Number,
-        required: true
-      },
-      poster_path: {
-        type: String,
-        required: true
-      },
-      date: {
-        type: Date,
-        default: Date.now()
-      }
-    }
-  ],
   social: {
     youtube: {
       type: String
@@ -48,6 +29,9 @@ const ProfileSchema = new mongoose.Schema({
     instagram: {
       type: String
     }
+  },
+  watchlist: {
+    type: Schema.Types.ObjectId
   },
   bio: {
     type: String

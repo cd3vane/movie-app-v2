@@ -1,9 +1,13 @@
 const mongoose = require('mongoose');
 const Schema = mongoose.Schema;
 
-const PostSchema = new Schema({
+const ReviewSchema = new Schema({
   user: {
     type: Schema.Types.ObjectId
+  },
+  movieId: {
+    type: String,
+    required: true
   },
   text: {
     type: String,
@@ -49,4 +53,4 @@ const PostSchema = new Schema({
   }
 });
 
-module.exports = mongoose.model('post', PostSchema);
+module.exports = mongoose.model('review', ReviewSchema);
