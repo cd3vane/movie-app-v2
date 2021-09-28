@@ -1,38 +1,38 @@
 import {
-  ADD_POST,
-  DELETE_POST,
-  GET_POST,
-  GET_POSTS,
-  POST_ERROR,
+  ADD_REVIEW,
+  DELETE_REVIEW,
+  GET_REVIEW,
+  GET_REVIEWS,
+  REVIEW_ERROR,
   UPDATE_LIKES,
   ADD_COMMENT,
   DELETE_COMMENT
 } from '../actions/types';
 
 const initialState = {
-  posts: [],
-  post: null,
+  reviews: [],
+  review: null,
   loading: true,
   error: {}
 };
 
-function postReducer(state = initialState, action) {
+function reviewReducer(state = initialState, action) {
   const { type, payload } = action;
 
   switch (type) {
-    case ADD_POST:
+    case ADD_REVIEW:
       return {
         ...state,
-        posts: [payload, ...state.posts],
+        reviews: [payload, ...state.reviews],
         loading: false
       };
-    case GET_POSTS:
+    case GET_REVIEWS:
       return {
         ...state,
-        posts: payload,
+        reviews: payload,
         loading: false
       };
-    case GET_POST:
+    case GET_REVIEW:
       return {
         ...state,
         post: payload,
@@ -41,18 +41,20 @@ function postReducer(state = initialState, action) {
     case UPDATE_LIKES:
       return {
         ...state,
-        posts: state.posts.map((post) =>
-          post._id === payload.id ? { ...post, likes: payload.likes } : post
+        reviews: state.reviews.map((review) =>
+          review._id === payload.id
+            ? { ...review, likes: payload.likes }
+            : review
         ),
         loading: false
       };
-    case DELETE_POST:
+    case DELETE_REVIEW:
       return {
         ...state,
-        posts: state.posts.filter((post) => post._id !== payload),
+        reviews: state.reviews.filter((review) => review._id !== payload),
         loading: false
       };
-    case POST_ERROR:
+    case REVIEW_ERROR:
       return {
         ...state,
         error: payload,
@@ -61,15 +63,15 @@ function postReducer(state = initialState, action) {
     case ADD_COMMENT:
       return {
         ...state,
-        post: { ...state.post, comments: payload },
+        review: { ...state.review, comments: payload },
         loading: false
       };
     case DELETE_COMMENT:
       return {
         ...state,
-        post: {
-          ...state.post,
-          comments: state.post.comments.filter(
+        review: {
+          ...state.review,
+          comments: state.review.comments.filter(
             (comment) => comment._id !== payload
           )
         },
@@ -80,4 +82,4 @@ function postReducer(state = initialState, action) {
   }
 }
 
-export default postReducer;
+export default reviewReducer;

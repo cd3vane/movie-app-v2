@@ -3,7 +3,7 @@ import { Link } from 'react-router-dom';
 import Spinner from '../layout/Spinner';
 import PropTypes from 'prop-types';
 import DashboardActions from './DashboardActions';
-import PreviewWatchlist from '../profile/PreviewWatchlist';
+import Watchlist from '../profile/Watchlist';
 import { connect } from 'react-redux';
 import { getCurrentProfile, deleteAccount } from '../../actions/profile';
 
@@ -34,7 +34,7 @@ const Dashboard = ({
               <div className='watchlist'>
                 <h3>Your Watchlist</h3>{' '}
                 <Link to='/account/watchlist'>View more</Link>
-                <PreviewWatchlist watchlist={profile.watchlist} />
+                <Watchlist watchlist={profile.watchlist} n={5} />
               </div>
               <div className='my-2'>
                 <button

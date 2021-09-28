@@ -30,9 +30,29 @@ const ProfileSchema = new Schema({
       type: String
     }
   },
-  watchlist: {
-    type: Schema.Types.ObjectId
-  },
+  watchlist: [
+    {
+      user: {
+        type: Schema.Types.ObjectId
+      },
+      title: {
+        type: String,
+        required: true
+      },
+      id: {
+        type: Number,
+        required: true
+      },
+      poster_path: {
+        type: String,
+        required: true
+      },
+      date: {
+        type: Date,
+        default: Date.now()
+      }
+    }
+  ],
   bio: {
     type: String
   },

@@ -1,13 +1,13 @@
 import React, { useState } from 'react';
 import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
-import { addPost } from '../../actions/post';
+import { addReview } from '../../actions/review';
 
-const PostForm = ({ addPost, history }) => {
+const ReviewForm = ({ addReview, history }) => {
   const [text, setText] = useState('');
 
   return (
-    <div className='post-form'>
+    <div className='review-form'>
       <div className='bg-primary p'>
         <h3>Say Something...</h3>
       </div>
@@ -15,7 +15,7 @@ const PostForm = ({ addPost, history }) => {
         className='form my-1'
         onSubmit={(e) => {
           e.preventDefault();
-          addPost({ text }, history);
+          addReview({ text }, history);
           setText('');
         }}
       >
@@ -23,7 +23,7 @@ const PostForm = ({ addPost, history }) => {
           name='text'
           cols='30'
           rows='5'
-          placeholder='Create a post'
+          placeholder='Create a review'
           value={text}
           onChange={(e) => setText(e.target.value)}
           required
@@ -34,8 +34,8 @@ const PostForm = ({ addPost, history }) => {
   );
 };
 
-PostForm.propTypes = {
-  addPost: PropTypes.func.isRequired
+ReviewForm.propTypes = {
+  addReview: PropTypes.func.isRequired
 };
 
-export default connect(null, { addPost })(PostForm);
+export default connect(null, { addReview })(ReviewForm);

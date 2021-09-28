@@ -5,7 +5,12 @@ import { getCurrentProfile } from '../../actions/profile';
 import MovieList from '../movies/MovieList';
 import PropTypes from 'prop-types';
 
-const Watchlist = ({ getCurrentProfile, profile: { profile, loading } }) => {
+const Watchlist = ({
+  getCurrentProfile,
+  watchlist,
+  profile: { loading },
+  n
+}) => {
   useEffect(() => {
     getCurrentProfile();
   }, [getCurrentProfile]);
@@ -13,12 +18,16 @@ const Watchlist = ({ getCurrentProfile, profile: { profile, loading } }) => {
   return (
     <>
       <Fragment>
-        {profile === null || loading ? (
+        {watchlist === null || loading ? (
           <Spinner />
         ) : (
           <Fragment>
             <div className='watchlist'>
-              <MovieList movies={profile.watchlist} />
+              {n !== null ? (
+                <MovieList movies={watchlist.slice(0, n)} />
+              ) : (
+                <MovieList movies={watchlist} />
+              )}
             </div>
           </Fragment>
         )}
