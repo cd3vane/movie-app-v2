@@ -5,7 +5,7 @@ import ProfileTop from './ProfileTop';
 import ProfileAbout from './ProfileAbout';
 import { connect } from 'react-redux';
 import Spinner from '../layout/Spinner';
-import Watchlist from './Watchlist';
+import Watchlist from '../movies/Watchlist';
 import { getProfileById } from '../../actions/profile';
 
 const Profile = ({

@@ -184,7 +184,7 @@ router.post(
 
     try {
       const user = await User.findById(req.user.id).select('-password');
-      const preview = await Review.findById(req.params.review_id);
+      const review = await Review.findById(req.params.review_id);
 
       const newComment = {
         text: req.body.text,
@@ -210,7 +210,7 @@ router.post(
 // @access Private
 router.delete('/comment/:review_id/:comment_id', auth, async (req, res) => {
   try {
-    const review = await Review.findById(req.params.id);
+    const review = await Review.findById(req.params.review_id);
 
     // Get comment from review
     const comment = review.comments.find(

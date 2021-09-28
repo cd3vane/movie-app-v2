@@ -1,33 +1,26 @@
 const mongoose = require('mongoose');
 const Schema = mongoose.Schema;
 
-const MovieSchema = new Schema({
+const MovieStatsSchema = new Schema({
+  user: {
+    type: Schema.Types.ObjectId
+  },
   likes: [
     {
       movieId: {
         type: String,
         required: true
-      },
-      users: [
-        {
-          user: {
-            type: Schema.Types.ObjectId
-          }
-        }
-      ]
+      }
     }
   ],
-  watchlist: [
+  watched: [
     {
-      user: {
-        type: Schema.Types.ObjectId
-      },
       title: {
         type: String,
         required: true
       },
-      id: {
-        type: Number,
+      movieId: {
+        type: String,
         required: true
       },
       poster_path: {
@@ -40,11 +33,28 @@ const MovieSchema = new Schema({
       }
     }
   ],
-  list: [
+  watchlist: [
     {
-      user: {
-        type: Schema.Types.ObjectId
+      title: {
+        type: String,
+        required: true
       },
+      movieId: {
+        type: String,
+        required: true
+      },
+      poster_path: {
+        type: String,
+        required: true
+      },
+      date: {
+        type: Date,
+        default: Date.now()
+      }
+    }
+  ],
+  lists: [
+    {
       name: {
         type: String,
         required: true
@@ -59,8 +69,8 @@ const MovieSchema = new Schema({
             type: String,
             required: true
           },
-          id: {
-            type: Number,
+          movieId: {
+            type: String,
             required: true
           },
           poster_path: {
@@ -77,4 +87,4 @@ const MovieSchema = new Schema({
   ]
 });
 
-module.exports = Movie = mongoose.model('movie', MovieSchema);
+module.exports = MovieStats = mongoose.model('moviestats', MovieStatsSchema);

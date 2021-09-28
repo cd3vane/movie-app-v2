@@ -11,7 +11,7 @@ import SearchMovies from '../movies/SearchMovies';
 import NotFound from '../layout/NotFound';
 import PrivateRoute from './PrivateRoute';
 import MovieDetails from '../movie/MovieDetails';
-import Watchlist from '../profile/Watchlist';
+import Watchlist from '../movies/Watchlist';
 
 const Routes = () => {
   return (

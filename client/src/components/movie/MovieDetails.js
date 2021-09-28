@@ -3,11 +3,8 @@ import { connect } from 'react-redux';
 import { Link } from 'react-router-dom';
 import Spinner from '../layout/Spinner';
 import { getMovieById } from '../../actions/movie';
-import {
-  addToWatchlist,
-  removeFromWatchlist,
-  getCurrentProfile
-} from '../../actions/profile';
+import MovieActions from './MovieActions';
+import { getCurrentMovieStats } from '../../actions/movieStats';
 import PropTypes from 'prop-types';
 
 const MovieDetails = ({
@@ -15,31 +12,21 @@ const MovieDetails = ({
   history,
   movie: { movie, loading },
   getMovieById,
-  addToWatchlist,
-  removeFromWatchlist,
-  getCurrentProfile,
-  profile: { profile }
+  getCurrentMovieStats,
+  movieStats: {
+    movieStats: { watchlist }
+  },
+  movieStats
 }) => {
   useEffect(() => {
     getMovieById(match.params.id);
-    getCurrentProfile();
-  }, [getMovieById, getCurrentProfile, match.params.id]);
+    getCurrentMovieStats();
+  }, [getMovieById, getCurrentMovieStats, match.params.id]);
   const IMGPATH = 'https://image.tmdb.org/t/p/w1280';
-
-  const isInWatchlist = (watchlist, movie) => {
-    if (watchlist.length > 0) {
-      for (let i = 0; i < watchlist.length; i++) {
-        if (watchlist[i].title === movie.title) {
-          return true;
-        }
-      }
-      return false;
-    }
-  };
 
   return (
     <Fragment>
-      {movie === null || profile === null || loading ? (
+      {movie === null || movieStats.loading || loading ? (
         <Spinner />
       ) : (
         <div>
@@ -53,15 +40,7 @@ const MovieDetails = ({
           </h3>
           <h1> Synopsis</h1>
           <p>{movie.overview}</p>
-          {isInWatchlist(profile.watchlist, movie) ? (
-            <button onClick={(e) => removeFromWatchlist(movie.id, history)}>
-              Remove from Watchlist
-            </button>
-          ) : (
-            <button onClick={(e) => addToWatchlist(movie.id, history)}>
-              Add to Watchlist
-            </button>
-          )}
+          <MovieActions watchlist={watchlist} movie={movie} />
         </div>
       )}
     </Fragment>
@@ -71,20 +50,16 @@ const MovieDetails = ({
 MovieDetails.propTypes = {
   movie: PropTypes.object.isRequired,
   getMovieById: PropTypes.func.isRequired,
-  getCurrentProfile: PropTypes.func.isRequired,
-  addToWatchlist: PropTypes.func.isRequired,
-  removeFromWatchlist: PropTypes.func.isRequired,
-  profile: PropTypes.object.isRequired
+  getCurrentMovieStats: PropTypes.func.isRequired,
+  movieStats: PropTypes.object.isRequired
 };
 
 const mapStateToProps = (state) => ({
   movie: state.movie,
-  profile: state.profile
+  movieStats: state.movieStats
 });
 
 export default connect(mapStateToProps, {
   getMovieById,
-  addToWatchlist,
-  removeFromWatchlist,
-  getCurrentProfile
+  getCurrentMovieStats
 })(MovieDetails);

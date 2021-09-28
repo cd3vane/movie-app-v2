@@ -3,22 +3,29 @@ import { Link } from 'react-router-dom';
 import Spinner from '../layout/Spinner';
 import PropTypes from 'prop-types';
 import DashboardActions from './DashboardActions';
-import Watchlist from '../profile/Watchlist';
+import Watchlist from '../movies/Watchlist';
 import { connect } from 'react-redux';
-import { getCurrentProfile, deleteAccount } from '../../actions/profile';
+import { getCurrentMovieStats } from '../../actions/movieStats';
+import { deleteAccount, getCurrentProfile } from '../../actions/profile';
 
 const Dashboard = ({
+  getCurrentMovieStats,
   getCurrentProfile,
   auth: { user },
-  profile: { profile, loading },
+  profile,
+  movieStats: {
+    loading,
+    movieStats: { watchlist }
+  },
   deleteAccount
 }) => {
   useEffect(() => {
     getCurrentProfile();
-  }, [getCurrentProfile]);
+    getCurrentMovieStats();
+  }, [getCurrentMovieStats, getCurrentProfile]);
   return (
     <Fragment>
-      {loading || user === null ? (
+      {profile.loading || loading || user === null ? (
         <Spinner />
       ) : (
         <Fragment>
@@ -34,7 +41,7 @@ const Dashboard = ({
               <div className='watchlist'>
                 <h3>Your Watchlist</h3>{' '}
                 <Link to='/account/watchlist'>View more</Link>
-                <Watchlist watchlist={profile.watchlist} n={5} />
+                <Watchlist watchlist={watchlist} n={5} />
               </div>
               <div className='my-2'>
                 <button
@@ -61,6 +68,7 @@ const Dashboard = ({
 };
 
 Dashboard.propTypes = {
+  getCurrentMovieStats: PropTypes.func.isRequired,
   getCurrentProfile: PropTypes.func.isRequired,
   auth: PropTypes.object.isRequired,
   profile: PropTypes.object.isRequired,
@@ -69,9 +77,12 @@ Dashboard.propTypes = {
 
 const mapStateToProps = (state) => ({
   auth: state.auth,
-  profile: state.profile
+  profile: state.profile,
+  movieStats: state.movieStats
 });
 
-export default connect(mapStateToProps, { getCurrentProfile, deleteAccount })(
-  Dashboard
-);
+export default connect(mapStateToProps, {
+  getCurrentMovieStats,
+  getCurrentProfile,
+  deleteAccount
+})(Dashboard);
