@@ -19,6 +19,8 @@ const List = ({ match, getListById, lists: { list, listsLoading } }) => {
         <Fragment>
           <Link to={'/account/lists'}>Back to lists</Link>
           <h1 className='large'>{list.name}</h1>
+          <p>{list.description}</p>
+          <br />
 
           {list.movies.length > 0 ? (
             <Fragment>

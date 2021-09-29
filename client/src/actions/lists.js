@@ -109,10 +109,16 @@ export const removeList = (listId) => async (dispatch) => {
 // Remove movie from list
 export const removeFromList = (listId, movieId) => async (dispatch) => {
   try {
-    await api.delete(`/lists/list/${listId}/${movieId}`);
-
+    const res = await api.get(`/lists/list/${listId}`);
     dispatch({
-      type: REMOVE_FROM_LIST
+      type: GET_LIST,
+      payload: res.data
+    });
+
+    await api.delete(`/lists/list/${listId}/${movieId}`);
+    dispatch({
+      type: REMOVE_FROM_LIST,
+      payload: movieId
     });
 
     dispatch(setAlert('Removed this movie from list'));

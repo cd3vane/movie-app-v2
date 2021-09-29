@@ -11,7 +11,7 @@ const ListPreview = ({ movies }) => {
         {movies.map((movie, index) => (
           <div key={index} className='preview-column'>
             {index < limit && (
-              <Link to={`/movie-details/${movie.id}`}>
+              <Link to={`/movie-details/${movie.movieId}`}>
                 <MovieCard key={movie.id} movie={movie} isPreview={true} />
               </Link>
             )}

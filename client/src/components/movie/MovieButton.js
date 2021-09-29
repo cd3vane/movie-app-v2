@@ -9,11 +9,11 @@ const MovieButton = ({
   removeFromList,
   addToList
 }) => {
+  const [inList, setInList] = useState(false);
+
   useEffect(() => {
     checkList();
-  });
-
-  const [inList, setInList] = useState(false);
+  }, [removeFromList, addToList]);
 
   const checkList = () => {
     for (let i = 0; i < movies.length; i++) {

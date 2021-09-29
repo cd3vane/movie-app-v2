@@ -1,4 +1,4 @@
-import React, { Fragment, useEffect } from 'react';
+import React, { Fragment, useEffect, useState } from 'react';
 import { connect } from 'react-redux';
 import { Link } from 'react-router-dom';
 import Spinner from '../layout/Spinner';
@@ -10,7 +10,7 @@ import PropTypes from 'prop-types';
 const MovieDetails = ({
   match,
   auth: { user },
-  lists: { lists, listsLoading },
+  lists: { lists, listsLoading, list },
   movie: { movie, movieLoading },
   getMovieById,
   getListsByUser
@@ -20,6 +20,8 @@ const MovieDetails = ({
     getListsByUser(user._id);
   }, [getMovieById, getListsByUser, match.params.id, user._id]);
   const IMGPATH = 'https://image.tmdb.org/t/p/w1280';
+
+  const [showButtons, toggleButtons] = useState(false);
 
   return (
     <Fragment>
@@ -37,10 +39,17 @@ const MovieDetails = ({
           </h3>
           <h1> Synopsis</h1>
           <p>{movie.overview}</p>
-          {lists.length > 0 ? (
-            <MovieButtons lists={lists} movie={movie} />
-          ) : (
-            <h4>Create a profile to add movies to lists</h4>
+          <button onClick={(e) => toggleButtons(!showButtons)}>
+            View Actions
+          </button>
+          {showButtons && (
+            <Fragment>
+              {lists.length > 0 ? (
+                <MovieButtons lists={lists} movie={movie} />
+              ) : (
+                <h4>Create a profile to add movies to lists</h4>
+              )}
+            </Fragment>
           )}
         </div>
       )}
