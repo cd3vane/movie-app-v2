@@ -9,7 +9,7 @@ import {
 const initialState = {
   profile: null,
   profiles: [],
-  loading: true,
+  profileLoading: true,
   error: {}
 };
 
@@ -22,27 +22,27 @@ function profileReducer(state = initialState, action) {
       return {
         ...state,
         profile: payload,
-        loading: false
+        profileLoading: false
       };
     case GET_PROFILES:
       return {
         ...state,
         profiles: payload,
-        loading: false
+        profileLoading: false
       };
     case PROFILE_ERROR:
       return {
         ...state,
         profile: null,
         error: payload,
-        loading: false
+        profileLoading: false
       };
     case CLEAR_PROFILE:
       return {
         ...state,
         profile: null,
         repos: [],
-        loading: false
+        profileLoading: false
       };
     default:
       return state;

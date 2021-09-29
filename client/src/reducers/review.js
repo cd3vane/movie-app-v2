@@ -12,7 +12,7 @@ import {
 const initialState = {
   reviews: [],
   review: null,
-  loading: true,
+  reviewLoading: true,
   error: {}
 };
 
@@ -24,19 +24,19 @@ function reviewReducer(state = initialState, action) {
       return {
         ...state,
         reviews: [payload, ...state.reviews],
-        loading: false
+        reviewLoading: false
       };
     case GET_REVIEWS:
       return {
         ...state,
         reviews: payload,
-        loading: false
+        reviewLoading: false
       };
     case GET_REVIEW:
       return {
         ...state,
         post: payload,
-        loading: false
+        reviewLoading: false
       };
     case UPDATE_LIKES:
       return {
@@ -46,25 +46,25 @@ function reviewReducer(state = initialState, action) {
             ? { ...review, likes: payload.likes }
             : review
         ),
-        loading: false
+        reviewLoading: false
       };
     case DELETE_REVIEW:
       return {
         ...state,
         reviews: state.reviews.filter((review) => review._id !== payload),
-        loading: false
+        reviewLoading: false
       };
     case REVIEW_ERROR:
       return {
         ...state,
         error: payload,
-        loading: false
+        reviewLoading: false
       };
     case ADD_COMMENT:
       return {
         ...state,
         review: { ...state.review, comments: payload },
-        loading: false
+        reviewLoading: false
       };
     case DELETE_COMMENT:
       return {
@@ -75,7 +75,7 @@ function reviewReducer(state = initialState, action) {
             (comment) => comment._id !== payload
           )
         },
-        loading: false
+        reviewLoading: false
       };
     default:
       return state;

@@ -4,13 +4,13 @@ import auth from './auth';
 import profile from './profile';
 import review from './review';
 import movie from './movie';
-import movieStats from './movieStats';
+import lists from './lists';
 
 export default combineReducers({
   alert,
   auth,
   profile,
   review,
-  movieStats,
+  lists,
   movie
 });

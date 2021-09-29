@@ -67,6 +67,8 @@ export const createProfile =
     try {
       const res = await api.post('/profile', formData);
 
+      createDefaultLists();
+
       dispatch({
         type: GET_PROFILE,
         payload: res.data
@@ -75,7 +77,7 @@ export const createProfile =
       dispatch(setAlert(edit ? 'Profile updated' : 'Profile created'));
 
       if (!edit) {
-        history.push('/dashboard');
+        history.push('/account/dashboard');
       }
     } catch (err) {
       const errors = err.response.data.errors;
@@ -107,5 +109,30 @@ export const deleteAccount = () => async (dispatch) => {
         payload: { msg: err.response.statusText, status: err.response.status }
       });
     }
+  }
+};
+
+const createDefaultLists = async (dispatch) => {
+  try {
+    const watchlist = {
+      name: 'Watchlist',
+      description: 'Movies I need to watch'
+    };
+    const watched = {
+      name: 'Watched',
+      description: 'Movies I have watched'
+    };
+    const liked = {
+      name: 'Liked',
+      description: 'Movies I like'
+    };
+    await api.post('/lists', watchlist);
+    await api.post('/lists', watched);
+    await api.post('/lists', liked);
+  } catch (err) {
+    dispatch({
+      type: PROFILE_ERROR,
+      payload: { msg: err.response.statusText, status: err.response.status }
+    });
   }
 };

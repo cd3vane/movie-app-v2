@@ -22,7 +22,10 @@ router.post(
       return res.status(400).json({ errors: errors.array() });
     }
     try {
+      const user = await User.findById(req.user.id).select('-password');
+
       const newList = new Lists({
+        user: req.user.id,
         name: req.body.name,
         description: req.body.description
       });
@@ -46,10 +49,31 @@ router.get('/', auth, async (req, res) => {
     return res.status(400).json({ errors: errors.array() });
   }
   try {
-    const lists = await Lists.find({});
+    const lists = await Lists.find();
 
     if (!lists) {
-      return res.status(400).json({ msg: 'There is no profile for this user' });
+      return res.status(400).json({ msg: 'There are no lists for this user' });
+    }
+    res.json(lists);
+  } catch (err) {
+    console.error(err.message);
+    res.status(400).json('Server error');
+  }
+});
+
+// @route    GET api/lists/:user_id
+// @desc     Get all lists by user
+// @access   Private
+router.get('/user/:user_id', auth, async (req, res) => {
+  const errors = validationResult(req);
+  if (!errors.isEmpty()) {
+    return res.status(400).json({ errors: errors.array() });
+  }
+  try {
+    const lists = await Lists.find({ user: req.params.user_id });
+
+    if (!lists) {
+      return res.status(400).json({ msg: 'There are no lists for this user' });
     }
     res.json(lists);
   } catch (err) {
@@ -61,7 +85,7 @@ router.get('/', auth, async (req, res) => {
 // @route    GET api/lists/:list_id
 // @desc     Get list by id
 // @access   Private
-router.get('/:list_id', auth, async (req, res) => {
+router.get('/list/:list_id', auth, async (req, res) => {
   const errors = validationResult(req);
   if (!errors.isEmpty()) {
     return res.status(400).json({ errors: errors.array() });
@@ -71,6 +95,10 @@ router.get('/:list_id', auth, async (req, res) => {
 
     if (!list) {
       return res.status(400).json({ msg: 'There is no such list' });
+    }
+
+    if (list.user.toString() !== req.user.id) {
+      return res.status(401).json({ msg: 'User not authorized' });
     }
 
     res.json(list);
@@ -102,6 +130,10 @@ router.put(
         return res.status(400).json({ msg: 'There is no such list' });
       }
 
+      if (list.user.toString() !== req.user.id) {
+        return res.status(401).json({ msg: 'User not authorized' });
+      }
+
       list.movies.unshift(req.body);
 
       await list.save();
@@ -129,6 +161,10 @@ router.delete('/:list_id/:movie_id', auth, async (req, res) => {
     // Make sure comment exists
     if (!movie) {
       return res.status(404).json({ msg: 'Movie not found' });
+    }
+
+    if (list.user.toString() !== req.user.id) {
+      return res.status(401).json({ msg: 'User not authorized' });
     }
 
     const removeIndex = list.movies
@@ -160,12 +196,16 @@ router.delete('/:list_id', auth, async (req, res) => {
       return res.status(404).json({ msg: 'List not found' });
     }
 
+    if (list.user.toString() !== req.user.id) {
+      return res.status(401).json({ msg: 'User not authorized' });
+    }
+
     if (
       list.name === 'Watchlist' ||
       list.name === 'Watched' ||
       list.name === 'Liked'
     ) {
-      return res.status(401).json({ msg: 'List cannot be deleted' });
+      return res.status(401).json({ msg: 'Default lists cannot be deleted' });
     }
 
     await list.remove();

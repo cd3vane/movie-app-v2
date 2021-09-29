@@ -11,7 +11,8 @@ import SearchMovies from '../movies/SearchMovies';
 import NotFound from '../layout/NotFound';
 import PrivateRoute from './PrivateRoute';
 import MovieDetails from '../movie/MovieDetails';
-import Watchlist from '../movies/Watchlist';
+import Lists from '../lists/Lists';
+import List from '../list/List';
 
 const Routes = () => {
   return (
@@ -38,7 +39,8 @@ const Routes = () => {
           path='/movie-details/:id'
           component={MovieDetails}
         />
-        <PrivateRoute exact path='/account/watchlist' component={Watchlist} />
+        <PrivateRoute exact path='/account/lists' component={Lists} />
+        <PrivateRoute exact path='/account/lists/:list_id' component={List} />
         <Route component={NotFound} />
       </Switch>
     </section>

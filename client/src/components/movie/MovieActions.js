@@ -1,50 +1,33 @@
 import React, { Fragment, useEffect, useState } from 'react';
 import { connect } from 'react-redux';
-import { addToWatchlist, removeFromWatchlist } from '../../actions/movieStats';
+import { addToList, removeFromList } from '../../actions/lists';
 import PropTypes from 'prop-types';
 
 const MovieActions = ({
   watchlist,
   movie: { id, title },
-  addToWatchlist,
-  removeFromWatchlist,
+  addToList,
+  removeFromList,
   history
 }) => {
-  useEffect(() => {
-    isInWatchlist(watchlist, title);
-  });
-  const [inWatchlist, setInWatchlist] = useState(false);
+  useEffect(() => {});
 
-  const isInWatchlist = (watchlist, title) => {
-    if (watchlist.length > 0) {
-      for (let i = 0; i < watchlist.length; i++) {
-        if (watchlist[i].title === title) {
-          setInWatchlist(true);
-        }
-      }
-      setInWatchlist(false);
-    }
-  };
   return (
     <Fragment>
-      {inWatchlist ? (
-        <button onClick={(e) => removeFromWatchlist(id, history)}>
-          Remove from Watchlist
+      {1 === 1 ? (
+        <button onClick={(e) => removeFromList(id, history)}>
+          Remove from List
         </button>
       ) : (
-        <button onClick={(e) => addToWatchlist(id, history)}>
-          Add to Watchlist
-        </button>
+        <button onClick={(e) => addToList(id, history)}>Add to List</button>
       )}
     </Fragment>
   );
 };
 
 MovieActions.propTypes = {
-  addToWatchlist: PropTypes.func.isRequired,
-  removeFromWatchlist: PropTypes.func.isRequired
+  addToList: PropTypes.func.isRequired,
+  removeFromList: PropTypes.func.isRequired
 };
 
-export default connect(null, { addToWatchlist, removeFromWatchlist })(
-  MovieActions
-);
+export default connect(null, { addToList, removeFromList })(MovieActions);

@@ -8,7 +8,7 @@ import {
 const initialState = {
   movie: null,
   movies: [],
-  loading: true,
+  movieLoading: true,
   error: {}
 };
 
@@ -20,27 +20,27 @@ export default function (state = initialState, action) {
       return {
         ...state,
         movie: payload,
-        loading: false
+        movieLoading: false
       };
     case GET_MOVIES:
       return {
         ...state,
         movies: payload,
-        loading: false
+        movieLoading: false
       };
     case MOVIE_ERROR:
       return {
         ...state,
         movie: null,
         error: payload,
-        loading: false
+        movieLoading: false
       };
     case CLEAR_MOVIES:
       return {
         ...state,
         movie: null,
         movies: [],
-        loading: false
+        movieLoading: false
       };
     default:
       return state;

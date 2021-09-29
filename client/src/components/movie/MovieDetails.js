@@ -4,7 +4,7 @@ import { Link } from 'react-router-dom';
 import Spinner from '../layout/Spinner';
 import { getMovieById } from '../../actions/movie';
 import MovieActions from './MovieActions';
-import { getCurrentMovieStats } from '../../actions/movieStats';
+import { getCurrentLists } from '../../actions/lists';
 import PropTypes from 'prop-types';
 
 const MovieDetails = ({
@@ -12,7 +12,7 @@ const MovieDetails = ({
   history,
   movie: { movie, loading },
   getMovieById,
-  getCurrentMovieStats,
+  getCurrentLists,
   movieStats: {
     movieStats: { watchlist }
   },
@@ -20,8 +20,8 @@ const MovieDetails = ({
 }) => {
   useEffect(() => {
     getMovieById(match.params.id);
-    getCurrentMovieStats();
-  }, [getMovieById, getCurrentMovieStats, match.params.id]);
+    getCurrentLists();
+  }, [getMovieById, getCurrentLists, match.params.id]);
   const IMGPATH = 'https://image.tmdb.org/t/p/w1280';
 
   return (
@@ -50,7 +50,7 @@ const MovieDetails = ({
 MovieDetails.propTypes = {
   movie: PropTypes.object.isRequired,
   getMovieById: PropTypes.func.isRequired,
-  getCurrentMovieStats: PropTypes.func.isRequired,
+  getCurrentLists: PropTypes.func.isRequired,
   movieStats: PropTypes.object.isRequired
 };
 
@@ -61,5 +61,5 @@ const mapStateToProps = (state) => ({
 
 export default connect(mapStateToProps, {
   getMovieById,
-  getCurrentMovieStats
+  getCurrentLists
 })(MovieDetails);

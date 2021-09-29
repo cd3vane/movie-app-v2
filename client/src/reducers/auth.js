@@ -10,7 +10,7 @@ import {
 const initialState = {
   token: localStorage.getItem('token'),
   isAuthenticated: null,
-  loading: true,
+  userLoading: true,
   user: null
 };
 
@@ -22,7 +22,7 @@ function authReducer(state = initialState, action) {
       return {
         ...state,
         isAuthenticated: true,
-        loading: false,
+        userLoading: false,
         user: payload
       };
     case REGISTER_SUCCESS:
@@ -31,7 +31,7 @@ function authReducer(state = initialState, action) {
         ...state,
         ...payload,
         isAuthenticated: true,
-        loading: false
+        userLoading: false
       };
     case ACCOUNT_DELETED:
     case AUTH_ERROR:
@@ -40,7 +40,7 @@ function authReducer(state = initialState, action) {
         ...state,
         token: null,
         isAuthenticated: false,
-        loading: false,
+        userLoading: false,
         user: null
       };
     default:

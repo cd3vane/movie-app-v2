@@ -3,29 +3,21 @@ import { Link } from 'react-router-dom';
 import Spinner from '../layout/Spinner';
 import PropTypes from 'prop-types';
 import DashboardActions from './DashboardActions';
-import Watchlist from '../movies/Watchlist';
 import { connect } from 'react-redux';
-import { getCurrentMovieStats } from '../../actions/movieStats';
 import { deleteAccount, getCurrentProfile } from '../../actions/profile';
 
 const Dashboard = ({
-  getCurrentMovieStats,
   getCurrentProfile,
   auth: { user },
-  profile,
-  movieStats: {
-    loading,
-    movieStats: { watchlist }
-  },
+  profile: { profile, loading },
   deleteAccount
 }) => {
   useEffect(() => {
     getCurrentProfile();
-    getCurrentMovieStats();
-  }, [getCurrentMovieStats, getCurrentProfile]);
+  }, [getCurrentProfile]);
   return (
     <Fragment>
-      {profile.loading || loading || user === null ? (
+      {loading || user === null ? (
         <Spinner />
       ) : (
         <Fragment>
@@ -40,8 +32,7 @@ const Dashboard = ({
               <br />
               <div className='watchlist'>
                 <h3>Your Watchlist</h3>{' '}
-                <Link to='/account/watchlist'>View more</Link>
-                <Watchlist watchlist={watchlist} n={5} />
+                <Link to='/account/lists'>View your lists</Link>
               </div>
               <div className='my-2'>
                 <button
@@ -68,21 +59,18 @@ const Dashboard = ({
 };
 
 Dashboard.propTypes = {
-  getCurrentMovieStats: PropTypes.func.isRequired,
   getCurrentProfile: PropTypes.func.isRequired,
   auth: PropTypes.object.isRequired,
-  profile: PropTypes.object.isRequired,
+  profile: PropTypes.object,
   deleteAccount: PropTypes.func.isRequired
 };
 
 const mapStateToProps = (state) => ({
   auth: state.auth,
-  profile: state.profile,
-  movieStats: state.movieStats
+  profile: state.profile
 });
 
 export default connect(mapStateToProps, {
-  getCurrentMovieStats,
   getCurrentProfile,
   deleteAccount
 })(Dashboard);

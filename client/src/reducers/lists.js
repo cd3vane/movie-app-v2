@@ -1,13 +1,15 @@
 import {
-  REMOVE_FROM_WATCHLIST,
-  UPDATE_WATCHLIST,
-  MOVIE_ERROR,
-  GET_MOVIE_STATS
+  REMOVE_FROM_LIST,
+  UPDATE_LIST,
+  LIST_ERROR,
+  GET_LIST,
+  GET_LISTS
 } from '../actions/types';
 
 const initialState = {
-  movieStats: [],
-  loading: true,
+  lists: [],
+  list: null,
+  listsLoading: true,
   error: {}
 };
 
@@ -15,14 +17,15 @@ function movieStatsReducer(state = initialState, action) {
   const { type, payload } = action;
 
   switch (type) {
-    case UPDATE_WATCHLIST:
+    case UPDATE_LIST:
       let watchlist = [...state.movieStats.watchlist];
       watchlist.push(payload);
       return {
         ...state,
-        movieStats: { watchlist }
+        movieStats: { watchlist },
+        listsLoading: false
       };
-    case REMOVE_FROM_WATCHLIST:
+    case REMOVE_FROM_LIST:
       return {
         ...state,
         movieStats: {
@@ -30,19 +33,25 @@ function movieStatsReducer(state = initialState, action) {
             (movie) => movie.id !== payload
           )
         },
-        loading: false
+        listsLoading: false
       };
-    case GET_MOVIE_STATS:
+    case GET_LISTS:
       return {
         ...state,
-        movieStats: payload,
-        loading: false
+        lists: payload,
+        listsLoading: false
       };
-    case MOVIE_ERROR:
+    case GET_LIST:
       return {
         ...state,
-        loading: false,
-        movieStats: [],
+        list: payload,
+        listsLoading: false
+      };
+    case LIST_ERROR:
+      return {
+        ...state,
+        listsLoading: false,
+        lists: [],
         error: payload
       };
     default:
