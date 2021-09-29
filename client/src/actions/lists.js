@@ -10,7 +10,7 @@ import {
 } from './types';
 
 // Get current lists
-export const getCurrentLists = (userId) => async (dispatch) => {
+export const getListsByUser = (userId) => async (dispatch) => {
   try {
     const res = await api.get(`/lists/user/${userId}`);
 
@@ -43,23 +43,29 @@ export const getListById = (listId) => async (dispatch) => {
   }
 };
 
-// Add Movie to Watchlist
-export const addToList = (listId, movieId, history) => async (dispatch) => {
+// Add Movie to list
+export const addToList = (listId, movieId) => async (dispatch) => {
   try {
+    console.log('getting movie from api');
     const config = {
       baseURL: `https://api.themoviedb.org/3/movie/${movieId}?api_key=845024cb2f20a2bbaba2bd37eddadafc`
     };
-    const movie = await movieApi.get('', config);
 
-    const res = await api.put('/movie/watchlist', movie.data);
+    const movie = await movieApi.get('', config);
+    const body = {
+      title: movie.data.title,
+      movieId: movie.data.id,
+      poster_path: movie.data.poster_path
+    };
+
+    const res = await api.put(`/lists/list/${listId}`, body);
 
     dispatch({
       type: UPDATE_LIST,
       payload: res.data
     });
 
-    history.push(`/movies/1`);
-    dispatch(setAlert('Movie Added to Watchlist'));
+    dispatch(setAlert('Movie Added to list'));
   } catch (error) {
     if (error.response) {
       // Request made and server responded
@@ -76,28 +82,52 @@ export const addToList = (listId, movieId, history) => async (dispatch) => {
   }
 };
 
-// Remove movie from watchlist
-export const removeFromList =
-  (listId, movieId, history) => async (dispatch) => {
-    try {
-      await api.delete(`/movie/watchlist/${movieId}`);
+// Remove entire list
+export const removeList = (listId) => async (dispatch) => {
+  try {
+    await api.delete(`/lists/${listId}`);
 
-      dispatch({
-        type: REMOVE_FROM_LIST
-      });
+    dispatch({
+      type: DELETE_LIST
+    });
 
-      history.push('/account/dashboard');
-      dispatch(setAlert('Removed from Watchlist'));
-    } catch (err) {
-      const errors = err.response.data.errors;
+    dispatch(setAlert('Deleted list'));
+  } catch (err) {
+    const errors = err.response.data.errors;
 
-      if (errors) {
-        errors.forEach((error) => dispatch(setAlert(error.msg, 'danger')));
-      }
-
-      dispatch({
-        type: LIST_ERROR,
-        payload: { msg: err.response.statusText, status: err.response.status }
-      });
+    if (errors) {
+      errors.forEach((error) => dispatch(setAlert(error.msg, 'danger')));
     }
-  };
+
+    dispatch({
+      type: LIST_ERROR,
+      payload: { msg: err.response.statusText, status: err.response.status }
+    });
+  }
+};
+
+// Remove movie from list
+export const removeFromList = (listId, movieId) => async (dispatch) => {
+  try {
+    await api.delete(`/lists/list/${listId}/${movieId}`);
+
+    dispatch({
+      type: REMOVE_FROM_LIST
+    });
+
+    dispatch(setAlert('Removed this movie from list'));
+  } catch (error) {
+    if (error.response) {
+      // Request made and server responded
+      console.log(error.response.data);
+      console.log(error.response.status);
+      console.log(error.response.headers);
+    } else if (error.request) {
+      // The request was made but no response was received
+      console.log(error.request);
+    } else {
+      // Something happened in setting up the request that triggered an Error
+      console.log('Error', error.message);
+    }
+  }
+};

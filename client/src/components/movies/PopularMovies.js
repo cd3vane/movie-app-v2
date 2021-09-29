@@ -23,7 +23,7 @@ const PopularMovies = ({
   useEffect(() => {
     getPopularMovies(match.params.pageNumber);
     history.push(`${currentPage}`);
-  }, [currentPage, getPopularMovies, match.params.pageNumber]);
+  }, [currentPage, getPopularMovies, match.params.pageNumber, history]);
 
   const paginate = (data) => {
     let pageNumber = data.selected + 1;

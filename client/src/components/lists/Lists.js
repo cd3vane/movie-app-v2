@@ -3,16 +3,16 @@ import PropTypes from 'prop-types';
 import Spinner from '../layout/Spinner';
 import ListItem from './ListItem';
 import { connect } from 'react-redux';
-import { getCurrentLists } from '../../actions/lists';
+import { getListsByUser } from '../../actions/lists';
 
 const Lists = ({
   auth: { user, userLoading },
-  getCurrentLists,
+  getListsByUser,
   lists: { lists, listsLoading }
 }) => {
   useEffect(() => {
-    getCurrentLists(user._id);
-  }, [getCurrentLists]);
+    getListsByUser(user._id);
+  }, [getListsByUser, user._id]);
 
   return (
     <Fragment>
@@ -35,7 +35,7 @@ const Lists = ({
 };
 
 Lists.propTypes = {
-  getCurrentLists: PropTypes.func.isRequired,
+  getListsByUser: PropTypes.func.isRequired,
   auth: PropTypes.object.isRequired,
   lists: PropTypes.object
 };
@@ -45,4 +45,4 @@ const mapStateToProps = (state) => ({
   lists: state.lists
 });
 
-export default connect(mapStateToProps, { getCurrentLists })(Lists);
+export default connect(mapStateToProps, { getListsByUser })(Lists);

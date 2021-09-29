@@ -31,8 +31,7 @@ const Dashboard = ({
               <DashboardActions user={user} />
               <br />
               <div className='watchlist'>
-                <h3>Your Watchlist</h3>{' '}
-                <Link to='/account/lists'>View your lists</Link>
+                <h3>Lists</h3> <Link to='/account/lists'>View your lists</Link>
               </div>
               <div className='my-2'>
                 <button

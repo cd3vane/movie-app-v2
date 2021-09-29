@@ -6,14 +6,10 @@ import MovieList from '../movies/MovieList';
 import { connect } from 'react-redux';
 import { getListById } from '../../actions/lists';
 
-const List = ({ match, auth, getListById, lists: { list, listsLoading } }) => {
-  useEffect(
-    () => {
-      getListById(match.params.list_id);
-    },
-    [getListById],
-    match.params.list_id
-  );
+const List = ({ match, getListById, lists: { list, listsLoading } }) => {
+  useEffect(() => {
+    getListById(match.params.list_id);
+  }, [getListById, match.params.list_id]);
 
   return (
     <Fragment>

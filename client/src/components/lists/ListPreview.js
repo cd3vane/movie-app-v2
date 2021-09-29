@@ -9,15 +9,13 @@ const ListPreview = ({ movies }) => {
     <>
       <div className='preview-row'>
         {movies.map((movie, index) => (
-          <Fragment>
+          <div key={index} className='preview-column'>
             {index < limit && (
-              <div key={index} className='preview-column'>
-                <Link to={`/movie-details/${movie.id}`}>
-                  <MovieCard key={movie.id} movie={movie} isPreview={true} />
-                </Link>
-              </div>
+              <Link to={`/movie-details/${movie.id}`}>
+                <MovieCard key={movie.id} movie={movie} isPreview={true} />
+              </Link>
             )}
-          </Fragment>
+          </div>
         ))}
       </div>
     </>

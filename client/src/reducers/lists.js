@@ -13,25 +13,21 @@ const initialState = {
   error: {}
 };
 
-function movieStatsReducer(state = initialState, action) {
+function listsReducer(state = initialState, action) {
   const { type, payload } = action;
 
   switch (type) {
     case UPDATE_LIST:
-      let watchlist = [...state.movieStats.watchlist];
-      watchlist.push(payload);
       return {
         ...state,
-        movieStats: { watchlist },
+        list: { movies: { ...state.movies, movies: payload } },
         listsLoading: false
       };
     case REMOVE_FROM_LIST:
       return {
         ...state,
-        movieStats: {
-          watchlist: state.movieStats.watchlist.filter(
-            (movie) => movie.id !== payload
-          )
+        list: {
+          movies: state.list.movies.filter((movie) => movie.movieId !== payload)
         },
         listsLoading: false
       };
@@ -59,4 +55,4 @@ function movieStatsReducer(state = initialState, action) {
   }
 }
 
-export default movieStatsReducer;
+export default listsReducer;

@@ -3,30 +3,27 @@ import { connect } from 'react-redux';
 import { Link } from 'react-router-dom';
 import Spinner from '../layout/Spinner';
 import { getMovieById } from '../../actions/movie';
-import MovieActions from './MovieActions';
-import { getCurrentLists } from '../../actions/lists';
+import MovieButtons from './MovieButtons';
+import { getListsByUser } from '../../actions/lists';
 import PropTypes from 'prop-types';
 
 const MovieDetails = ({
   match,
-  history,
-  movie: { movie, loading },
+  auth: { user },
+  lists: { lists, listsLoading },
+  movie: { movie, movieLoading },
   getMovieById,
-  getCurrentLists,
-  movieStats: {
-    movieStats: { watchlist }
-  },
-  movieStats
+  getListsByUser
 }) => {
   useEffect(() => {
     getMovieById(match.params.id);
-    getCurrentLists();
-  }, [getMovieById, getCurrentLists, match.params.id]);
+    getListsByUser(user._id);
+  }, [getMovieById, getListsByUser, match.params.id, user._id]);
   const IMGPATH = 'https://image.tmdb.org/t/p/w1280';
 
   return (
     <Fragment>
-      {movie === null || movieStats.loading || loading ? (
+      {movie === null || movieLoading || listsLoading ? (
         <Spinner />
       ) : (
         <div>
@@ -40,7 +37,11 @@ const MovieDetails = ({
           </h3>
           <h1> Synopsis</h1>
           <p>{movie.overview}</p>
-          <MovieActions watchlist={watchlist} movie={movie} />
+          {lists.length > 0 ? (
+            <MovieButtons lists={lists} movie={movie} />
+          ) : (
+            <h4>Create a profile to add movies to lists</h4>
+          )}
         </div>
       )}
     </Fragment>
@@ -50,16 +51,16 @@ const MovieDetails = ({
 MovieDetails.propTypes = {
   movie: PropTypes.object.isRequired,
   getMovieById: PropTypes.func.isRequired,
-  getCurrentLists: PropTypes.func.isRequired,
-  movieStats: PropTypes.object.isRequired
+  getListsByUser: PropTypes.func.isRequired
 };
 
 const mapStateToProps = (state) => ({
   movie: state.movie,
-  movieStats: state.movieStats
+  auth: state.auth,
+  lists: state.lists
 });
 
 export default connect(mapStateToProps, {
   getMovieById,
-  getCurrentLists
+  getListsByUser
 })(MovieDetails);

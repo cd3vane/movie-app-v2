@@ -108,11 +108,11 @@ router.get('/list/:list_id', auth, async (req, res) => {
   }
 });
 
-// @route    PUT api/lists/:list_id
+// @route    PUT api/lists/list/:list_id
 // @desc     Add movie to a list
 // @access   Private
 router.put(
-  '/:list_id',
+  '/list/:list_id',
   auth,
   check('title', 'Title is required').notEmpty(),
   check('movieId', 'MovieId is required').notEmpty(),
@@ -124,7 +124,7 @@ router.put(
     }
 
     try {
-      const list = await Lists.findOne({ _id: req.params.list_id });
+      const list = await Lists.findById(req.params.list_id);
 
       if (!list) {
         return res.status(400).json({ msg: 'There is no such list' });
@@ -146,10 +146,10 @@ router.put(
   }
 );
 
-// @route    Delete api/lists/:list_id/:movie_id
+// @route    Delete api/lists/list/:list_id/movie/:movie_id
 // @desc     Delete a movie from a list
 // @access   Private
-router.delete('/:list_id/:movie_id', auth, async (req, res) => {
+router.delete('/list/:list_id/:movie_id', auth, async (req, res) => {
   try {
     const list = await Lists.findById(req.params.list_id);
 

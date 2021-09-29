@@ -38,7 +38,7 @@ const Profile = ({
             <ProfileAbout profile={profile} />
           </div>
           <div className='watchlist'>
-            <h3>Watchlist</h3>
+            <h3>Lists</h3>
           </div>
         </Fragment>
       )}

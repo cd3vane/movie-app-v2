@@ -13,46 +13,46 @@ const ReviewItem = ({
   removeLike
 }) => {
   return (
-    <div class='review bg-white p-1 my-1'>
+    <div className='review bg-white p-1 my-1'>
       <div>
         <Link to={`/profile/${user}`}>
-          <img class='round-img' src={avatar} alt='' />
+          <img className='round-img' src={avatar} alt='' />
           <h4>{name}</h4>
         </Link>
       </div>
       <div>
-        <p class='my-1'>{text}</p>
-        <p class='review-date'>
+        <p className='my-1'>{text}</p>
+        <p className='review-date'>
           Reviewed on <Moment format='YYYY/MM/DD'>{date}</Moment>
         </p>
         <button
           onClick={(e) => addLike(_id)}
           type='button'
-          class='btn btn-light'
+          className='btn btn-light'
         >
-          <i class='fas fa-thumbs-up'></i>{' '}
+          <i className='fas fa-thumbs-up'></i>{' '}
           <span>{likes.length > 0 && <span>{likes.length}</span>}</span>
         </button>
         <button
           onClick={(e) => removeLike(_id)}
           type='button'
-          class='btn btn-light'
+          className='btn btn-light'
         >
-          <i class='fas fa-thumbs-down'></i>
+          <i className='fas fa-thumbs-down'></i>
         </button>
-        <Link to={`/reviews/${_id}`} class='btn btn-primary'>
+        <Link to={`/reviews/${_id}`} className='btn btn-primary'>
           Discussion{' '}
           {comments.lenth > 0 && (
-            <span class='comment-count'>{comments.length}</span>
+            <span className='comment-count'>{comments.length}</span>
           )}
         </Link>
         {!auth.loading && user === auth.user._id && (
           <button
             onClick={(e) => deleteReview(_id)}
             type='button'
-            class='btn btn-danger'
+            className='btn btn-danger'
           >
-            <i class='fas fa-times'></i>
+            <i className='fas fa-times'></i>
           </button>
         )}
       </div>
