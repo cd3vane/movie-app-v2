@@ -580,6 +580,10 @@ img {
 }
 
 .list-container {
+  box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2);
+  border-radius: 6px !important;
+  transition: 0.3s;
+  background-color: #2a2b2a;
   position: relative;
   align-items: center;
   grid-gap: 2rem;
@@ -587,6 +591,24 @@ img {
   line-height: 1.8;
   margin-bottom: 1rem;
   margin-top: 1rem;
+}
+
+.profile-list-container {
+  box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2);
+  border-radius: 6px !important;
+  transition: 0.3s;
+  background-color: #2a2b2a;
+  display: grid;
+  grid-template-columns: 2fr 4fr 2fr;
+  align-items: center;
+  grid-gap: 2rem;
+  padding: 1rem;
+  line-height: 1.8;
+  margin-bottom: 1rem;
+}
+
+.btn-rounded {
+  border-radius: 6px !important;
 }
 
 .watchlist-btn {
@@ -705,34 +727,42 @@ ul {
 .movie-img {
   grid-area: img;
   background-color: #7ee9b700;
-  height: 70%;
-  width: 70%;
+  width: 50%;
   margin: 0 auto;
   padding-bottom: 30px;
+  padding-top: 30px;
   max-width: 948px;
 }
 
 .movie-about {
   grid-area: about;
-  margin: auto;
+  margin-top: auto;
+  margin-bottom: auto;
 }
 
 .movie-details {
   grid-area: details;
-  margin: auto;
+  margin-top: auto;
+  margin-bottom: auto;
 }
 
 .movie-genres {
   grid-area: genres;
-  margin: auto;
+  text-align: right;
+  margin-top: auto;
+  margin-bottom: auto;
 }
 
 .movie-container {
+  box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2);
+  border-radius: 6px !important;
+  transition: 0.3s;
+  background-color: #2a2b2a;
   display: grid;
   grid-template-columns: 2fr 2fr;
   align-items: center;
   grid-gap: 2rem;
-  padding: 1rem;
+  padding: 3rem;
   line-height: 1.8;
   margin-bottom: 1rem;
 }
@@ -745,4 +775,15 @@ ul {
     'actions actions'
     'reviews reviews';
   grid-gap: 1rem;
+}
+
+.movie-reviews {
+  grid-area: reviews;
+  margin-top: auto;
+  margin-bottom: auto;
+}
+.movie-actions {
+  grid-area: actions;
+  margin-top: auto;
+  margin-bottom: auto;
 }

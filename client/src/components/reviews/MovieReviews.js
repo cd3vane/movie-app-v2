@@ -34,7 +34,10 @@ const MovieReviews = ({
         </Fragment>
       ) : (
         <Fragment>
-          <h4>This user does not have any reviews yet</h4>
+          <h4>This movie does not have any reviews yet</h4>
+          <Link to={`/add-review/${id}`} className='btn btn-light'>
+            Add Review
+          </Link>
         </Fragment>
       )}
     </Fragment>

@@ -5,7 +5,7 @@ import ListPreview from './ListPreview';
 
 const ListItem = ({ list: { _id, name, movies } }) => {
   return (
-    <div className='list-container bg-light'>
+    <div className='list-container'>
       <div>
         {movies.length > 0 ? (
           <Fragment>

@@ -3,6 +3,7 @@ import { connect } from 'react-redux';
 import { Link } from 'react-router-dom';
 import Spinner from '../layout/Spinner';
 import { getMovieById } from '../../actions/movie';
+import formatDate from '../../utils/formatDate';
 import MovieButtons from './MovieButtons';
 import MovieReviews from '../reviews/MovieReviews';
 import { getListsByUser } from '../../actions/lists';
@@ -41,10 +42,15 @@ const MovieDetails = ({
               <p>{movie.overview}</p>
             </div>
             <div className='movie-details'>
+              <h2 className='large text-primary'>Movie Details</h2>
               <p>
-                <i className='fa fa-star' aria-hidden='true'></i> 8
+                Rated <i className='fa fa-star' aria-hidden='true'></i>{' '}
+                {movie.vote_average} / 10 by {movie.vote_count} users.
               </p>
-              {movie.release_date} / {movie.runtime}
+              <p>
+                Released: {formatDate(movie.release_date)} <br />
+                Runtime: {movie.runtime} minutes
+              </p>
             </div>
             <div className='movie-genres'>
               <h3 className='text-primary'>Genres</h3>
@@ -56,22 +62,24 @@ const MovieDetails = ({
                 </span>
               </div>
             </div>
-          </div>
-          <button onClick={(e) => toggleButtons(!showButtons)}>
-            View Actions
-          </button>
-          {showButtons && (
-            <Fragment>
-              {lists.length > 0 ? (
-                <MovieButtons lists={lists} movie={movie} />
-              ) : (
-                <h4>Create a profile to add movies to lists</h4>
+            <div className='movie-actions'>
+              <button onClick={(e) => toggleButtons(!showButtons)}>
+                View Actions
+              </button>
+              {showButtons && (
+                <Fragment>
+                  {lists.length > 0 ? (
+                    <MovieButtons lists={lists} movie={movie} />
+                  ) : (
+                    <h4>Create a profile to add movies to lists</h4>
+                  )}
+                </Fragment>
               )}
-            </Fragment>
-          )}
+            </div>
 
-          <div className='movie-reviews'>
-            <MovieReviews id={movie.id} />
+            <div className='movie-reviews'>
+              <MovieReviews id={movie.id} />
+            </div>
           </div>
         </Fragment>
       )}

@@ -42,8 +42,8 @@ const Routes = () => {
           path='/movie-details/:id'
           component={MovieDetails}
         />
-        <PrivateRoute exact path='/account/lists' component={Lists} />
-        <PrivateRoute exact path='/account/lists/:list_id' component={List} />
+        <PrivateRoute exact path='/:user_id/lists' component={Lists} />
+        <PrivateRoute exact path='/:user_id/lists/:list_id' component={List} />
         <Route exact path='/:user_id/reviews' component={UserReviews} />
         <Route exact path='/review/:review_id' component={Review} />
         <PrivateRoute exact path='/add-review' component={ReviewForm} />

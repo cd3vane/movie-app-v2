@@ -8,13 +8,13 @@ const DashboardActions = ({ user: { _id } }) => {
         <i className='fas fa-user-circle text-primary'></i> Edit Profile
       </Link>
       <Link to={`/${_id}/lists`} className='btn btn-light'>
-        <i className='fab fa-black-tie text-primary'></i> View Lists
+        <i className='fas fa-list text-primary'></i> My Lists
       </Link>
       <Link to='/movies/1' className='btn btn-light'>
-        <i className='fas fa-graduation-cap text-primary'></i> Discover Movies
+        <i className='fas fa-search text-primary'></i> Discover Movies
       </Link>
       <Link to={`/${_id}/reviews`} className='btn btn-light'>
-        <i className='fas fa-graduation-cap text-primary'></i> My Reviews
+        <i className='fas fa-pen text-primary'></i> My Reviews
       </Link>
     </div>
   );
