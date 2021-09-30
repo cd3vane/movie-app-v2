@@ -7,11 +7,14 @@ const DashboardActions = ({ user: { _id } }) => {
       <Link to='/update-profile' className='btn btn-light'>
         <i className='fas fa-user-circle text-primary'></i> Edit Profile
       </Link>
-      <Link to={'/account/lists'} className='btn btn-light'>
+      <Link to={`/${_id}/lists`} className='btn btn-light'>
         <i className='fab fa-black-tie text-primary'></i> View Lists
       </Link>
       <Link to='/movies/1' className='btn btn-light'>
         <i className='fas fa-graduation-cap text-primary'></i> Discover Movies
+      </Link>
+      <Link to={`/${_id}/reviews`} className='btn btn-light'>
+        <i className='fas fa-graduation-cap text-primary'></i> My Reviews
       </Link>
     </div>
   );

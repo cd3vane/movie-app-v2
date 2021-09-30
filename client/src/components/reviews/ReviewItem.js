@@ -40,7 +40,7 @@ const ReviewItem = ({
         >
           <i className='fas fa-thumbs-down'></i>
         </button>
-        <Link to={`/reviews/${_id}`} className='btn btn-primary'>
+        <Link to={`/review/${_id}`} className='btn btn-primary'>
           Discussion{' '}
           {comments.lenth > 0 && (
             <span className='comment-count'>{comments.length}</span>

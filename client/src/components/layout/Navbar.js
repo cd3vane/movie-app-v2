@@ -16,7 +16,7 @@ const Navbar = ({ auth: { isAuthenticated, loading }, logout }) => {
       <li>
         <Link to='/account/dashboard'>
           <i className='fas fa-user' />{' '}
-          <span className='hide-sm'> Profile </span>
+          <span className='hide-sm'> Dashboard </span>
         </Link>
       </li>
       <li>
@@ -32,7 +32,7 @@ const Navbar = ({ auth: { isAuthenticated, loading }, logout }) => {
     <nav className='navbar bg-dark'>
       <h1>
         <Link to={'/movies/1'}>
-          <i className='fas fa-code'></i> Movie Shiz
+          <i className='fas fa-film'></i> MovieFilms
         </Link>
       </h1>
       <Fragment>{authLinks}</Fragment>

@@ -6,13 +6,13 @@ import { connect } from 'react-redux';
 import { getListsByUser } from '../../actions/lists';
 
 const Lists = ({
-  auth: { user, userLoading },
+  profile: { profile, userLoading },
   getListsByUser,
   lists: { lists, listsLoading }
 }) => {
   useEffect(() => {
-    getListsByUser(user._id);
-  }, [getListsByUser, user._id]);
+    getListsByUser(profile.user._id);
+  }, [getListsByUser, profile.user._id]);
 
   return (
     <Fragment>
@@ -36,12 +36,12 @@ const Lists = ({
 
 Lists.propTypes = {
   getListsByUser: PropTypes.func.isRequired,
-  auth: PropTypes.object.isRequired,
+  profile: PropTypes.object.isRequired,
   lists: PropTypes.object
 };
 
 const mapStateToProps = (state) => ({
-  auth: state.auth,
+  profile: state.profile,
   lists: state.lists
 });
 

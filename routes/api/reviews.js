@@ -40,7 +40,7 @@ router.post(
 );
 
 // @route  GET api/reviews/user/:user_id
-// @desc   Get all reviews by one user
+// @desc   Get all reviews from one user
 // @access Private
 router.get('/user/:user_id', auth, async (req, res) => {
   try {

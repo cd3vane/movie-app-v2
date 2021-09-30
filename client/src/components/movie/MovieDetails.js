@@ -4,13 +4,14 @@ import { Link } from 'react-router-dom';
 import Spinner from '../layout/Spinner';
 import { getMovieById } from '../../actions/movie';
 import MovieButtons from './MovieButtons';
+import MovieReviews from '../reviews/MovieReviews';
 import { getListsByUser } from '../../actions/lists';
 import PropTypes from 'prop-types';
 
 const MovieDetails = ({
   match,
   auth: { user },
-  lists: { lists, listsLoading, list },
+  lists: { lists, listsLoading },
   movie: { movie, movieLoading },
   getMovieById,
   getListsByUser
@@ -28,17 +29,34 @@ const MovieDetails = ({
       {movie === null || movieLoading || listsLoading ? (
         <Spinner />
       ) : (
-        <div>
+        <Fragment>
           <Link to='/movies/1'>Back</Link>
-          <h1 className='text-center'>{movie.title}</h1>
-          <div className='img-container'>
-            <img src={`${IMGPATH}${movie.poster_path}`} alt='Movie' />
+          <div className='movie-container movie-grid'>
+            <div className='movie-img'>
+              <img src={`${IMGPATH}/${movie.poster_path}`} />
+            </div>
+            <div className='movie-about'>
+              <h1 className='large text-primary'>{movie.title}</h1>
+              <h3>{movie.tagline}</h3>
+              <p>{movie.overview}</p>
+            </div>
+            <div className='movie-details'>
+              <p>
+                <i className='fa fa-star' aria-hidden='true'></i> 8
+              </p>
+              {movie.release_date} / {movie.runtime}
+            </div>
+            <div className='movie-genres'>
+              <h3 className='text-primary'>Genres</h3>
+              <div>
+                <span>
+                  {movie.genres.map((genre) => (
+                    <div>{genre.name}</div>
+                  ))}
+                </span>
+              </div>
+            </div>
           </div>
-          <h3 className='text-center'>
-            Rating: {movie.vote_average}/10 by {movie.vote_count} users
-          </h3>
-          <h1> Synopsis</h1>
-          <p>{movie.overview}</p>
           <button onClick={(e) => toggleButtons(!showButtons)}>
             View Actions
           </button>
@@ -51,7 +69,11 @@ const MovieDetails = ({
               )}
             </Fragment>
           )}
-        </div>
+
+          <div className='movie-reviews'>
+            <MovieReviews id={movie.id} />
+          </div>
+        </Fragment>
       )}
     </Fragment>
   );

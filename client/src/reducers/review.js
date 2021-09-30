@@ -35,7 +35,7 @@ function reviewReducer(state = initialState, action) {
     case GET_REVIEW:
       return {
         ...state,
-        post: payload,
+        review: payload,
         reviewLoading: false
       };
     case UPDATE_LIKES:

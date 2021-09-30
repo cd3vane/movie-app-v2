@@ -12,7 +12,7 @@ import {
 } from './types';
 
 // Get reviews by user
-export const getReviesByUser = (userId) => async (dispatch) => {
+export const getReviewsByUser = (userId) => async (dispatch) => {
   try {
     const res = await api.get(`/reviews/user/${userId}`);
 
@@ -80,7 +80,7 @@ export const removeLike = (id) => async (dispatch) => {
 };
 
 // Delete review
-export const deletePost = (id) => async (dispatch) => {
+export const deleteReview = (id) => async (dispatch) => {
   try {
     await api.delete(`/reviews/${id}`);
 
@@ -157,7 +157,7 @@ export const addComment = (reviewId, formData) => async (dispatch) => {
 // Delete comment
 export const deleteComment = (reviewId, commentId) => async (dispatch) => {
   try {
-    await api.delete(`/reviews/comment/${reviewsId}/${commentId}`);
+    await api.delete(`/reviews/comment/${reviewId}/${commentId}`);
 
     dispatch({
       type: DELETE_COMMENT,

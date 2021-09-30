@@ -3,6 +3,8 @@ import { Link } from 'react-router-dom';
 import PropTypes from 'prop-types';
 import ProfileTop from './ProfileTop';
 import ProfileAbout from './ProfileAbout';
+import Lists from '../lists/Lists';
+import Reviews from '../reviews/UserReviews';
 import { connect } from 'react-redux';
 import Spinner from '../layout/Spinner';
 import { getProfileById } from '../../actions/profile';
@@ -37,8 +39,12 @@ const Profile = ({
             <ProfileTop profile={profile} />
             <ProfileAbout profile={profile} />
           </div>
-          <div className='watchlist'>
-            <h3>Lists</h3>
+          <div className='lists'>
+            <Lists />
+          </div>
+          <div className='reviews'>
+            <h3>Reviews</h3>
+            <Reviews />
           </div>
         </Fragment>
       )}

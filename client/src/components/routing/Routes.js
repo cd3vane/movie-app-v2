@@ -13,6 +13,9 @@ import PrivateRoute from './PrivateRoute';
 import MovieDetails from '../movie/MovieDetails';
 import Lists from '../lists/Lists';
 import List from '../list/List';
+import UserReviews from '../reviews/UserReviews';
+import ReviewForm from '../reviews/ReviewForm';
+import Review from '../review/Review';
 
 const Routes = () => {
   return (
@@ -41,6 +44,9 @@ const Routes = () => {
         />
         <PrivateRoute exact path='/account/lists' component={Lists} />
         <PrivateRoute exact path='/account/lists/:list_id' component={List} />
+        <Route exact path='/:user_id/reviews' component={UserReviews} />
+        <Route exact path='/review/:review_id' component={Review} />
+        <PrivateRoute exact path='/add-review' component={ReviewForm} />
         <Route component={NotFound} />
       </Switch>
     </section>

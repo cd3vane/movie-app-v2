@@ -10,15 +10,15 @@ import CommentItem from './CommentItem';
 
 const Review = ({ getReview, review: { review, loading }, match }) => {
   useEffect(() => {
-    getReview(match.params.id);
-  }, [getReview, match.params.id]);
+    getReview(match.params.review_id);
+  }, [getReview, match.params.review_id]);
   return (
     <Fragment>
       {review === null || loading ? (
         <Spinner />
       ) : (
         <Fragment>
-          <Link to='/reviews' class='btn'>
+          <Link to={`/${review.user}/reviews`} class='btn'>
             Back To Reviews
           </Link>
           <div class='review bg-white p-1 my-1'>
