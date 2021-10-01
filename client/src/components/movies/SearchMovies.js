@@ -1,13 +1,17 @@
-import React, { Fragment, useState } from 'react';
+import React, { Fragment, useState, useEffect } from 'react';
 import Spinner from '../layout/Spinner';
 import { connect } from 'react-redux';
 import MovieList from './MovieList';
 import { searchMovies } from '../../actions/movie';
 import PropTypes from 'prop-types';
 
-const SearchMovies = ({ searchMovies, movie: { movies } }) => {
+const SearchMovies = ({ match, searchMovies, movie: { movies } }) => {
   const [text, setText] = useState('');
   const [loading, setLoading] = useState('');
+
+  useEffect(() => {
+    searchMovies(text, match.params.page_number);
+  }, [searchMovies, match.params.page_number]);
 
   const onSubmit = (e) => {
     e.preventDefault();
@@ -18,28 +22,27 @@ const SearchMovies = ({ searchMovies, movie: { movies } }) => {
     }
     setLoading(true);
 
-    searchMovies(text);
-
-    setText('');
+    searchMovies(text, match.params.page_number);
 
     setLoading(false);
   };
 
   return (
     <>
-      <form className='add-form' onSubmit={onSubmit}>
-        <div className='form-control'>
-          <label>Search</label>
+      <form onSubmit={onSubmit}>
+        <div className='search'>
           <input
             type='text'
             placeholder='Enter a movie title'
+            className='search-term'
             value={text}
             onChange={(e) => setText(e.target.value)}
           />
-          <input type='submit' className='btn btn-block' value='Search' />
+          <button type='submit' className='search-button' value='Search'>
+            <i className='fa fa-search'></i>{' '}
+          </button>
         </div>
       </form>
-      <Fragment></Fragment>
       {loading ? (
         <Spinner />
       ) : (
@@ -55,7 +58,7 @@ const SearchMovies = ({ searchMovies, movie: { movies } }) => {
 
 SearchMovies.propTypes = {
   searchMovies: PropTypes.func.isRequired,
-  movies: PropTypes.object.isRequired
+  movies: PropTypes.object
 };
 
 const mapStateToProps = (state) => ({

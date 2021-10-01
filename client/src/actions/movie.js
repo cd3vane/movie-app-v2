@@ -26,13 +26,15 @@ export const getPopularMovies = (pageNumber) => async (dispatch) => {
 };
 
 // Search movies
-export const searchMovies = (title) => async (dispatch) => {
+export const searchMovies = (title, page_number) => async (dispatch) => {
   dispatch({ type: CLEAR_MOVIES });
   try {
     const config = {
       baseURL:
         'https://api.themoviedb.org/3/search/movie?&api_key=04c35731a5ee918f014970082a0088b1&query=' +
-        `${title}`
+        `${title}` +
+        '&language=en-US&page=' +
+        `${page_number}`
     };
 
     const res = await movieApi.get('', config);

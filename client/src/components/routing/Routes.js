@@ -11,7 +11,7 @@ import SearchMovies from '../movies/SearchMovies';
 import NotFound from '../layout/NotFound';
 import PrivateRoute from './PrivateRoute';
 import MovieDetails from '../movie/MovieDetails';
-import Lists from '../lists/Lists';
+import MyLists from '../lists/MyLists';
 import List from '../list/List';
 import UserReviews from '../reviews/UserReviews';
 import ReviewForm from '../reviews/ReviewForm';
@@ -23,26 +23,14 @@ const Routes = () => {
       <Alert />
       <Switch>
         <Route exact path='/register' component={Register} />
-        <PrivateRoute exact path='/profiles' component={Profiles} />
+        <Route exact path='/profiles' component={Profiles} />
         <PrivateRoute exact path='/account/dashboard' component={Dashboard} />
         <PrivateRoute exact path='/profile/:id' component={Profile} />
         <PrivateRoute exact path='/update-profile' component={ProfileForm} />
-        <PrivateRoute
-          exact
-          path='/movies/:pageNumber'
-          component={PopularMovies}
-        />
-        <PrivateRoute
-          exact
-          path='/search/:pageNumber'
-          component={SearchMovies}
-        />
-        <PrivateRoute
-          exact
-          path='/movie-details/:id'
-          component={MovieDetails}
-        />
-        <PrivateRoute exact path='/:user_id/lists' component={Lists} />
+        <Route exact path='/movies/:pageNumber' component={PopularMovies} />
+        <Route exact path='/search/:page_number' component={SearchMovies} />
+        <Route exact path='/movie-details/:id' component={MovieDetails} />
+        <PrivateRoute exact path='/:user_id/lists' component={MyLists} />
         <PrivateRoute exact path='/:user_id/lists/:list_id' component={List} />
         <Route exact path='/:user_id/reviews' component={UserReviews} />
         <Route exact path='/review/:review_id' component={Review} />

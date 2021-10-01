@@ -675,11 +675,15 @@ ul {
   cursor: pointer;
 }
 
+.pagination {
+  text-decoration: none;
+  top: 100%;
+}
+
 .pagination a {
   color: var(--primary-color);
   float: left;
   padding: 8px 16px;
-  text-decoration: none;
 }
 
 .preview-row {
@@ -777,6 +781,10 @@ ul {
   grid-gap: 1rem;
 }
 
+.movie-results {
+  text-align: center;
+}
+
 .movie-reviews {
   grid-area: reviews;
   margin-top: auto;
@@ -786,4 +794,40 @@ ul {
   grid-area: actions;
   margin-top: auto;
   margin-bottom: auto;
+}
+
+.search {
+  width: 100%;
+  position: relative;
+  display: flex;
+  padding: 1rem;
+}
+
+.search-term {
+  width: 100%;
+  border: 3px solid var(--primary-color);
+  border-right: none;
+  padding: 5px;
+  height: 50px;
+  border-right: none;
+  border-radius: 5px 0 0 5px;
+  font-size: large;
+  outline: none;
+  color: #9dbfaf;
+}
+
+.search-term:focus {
+  color: var(--primary-color);
+}
+
+.search-button {
+  width: 40px;
+  height: 50px;
+  border: 1px solid var(--primary-color);
+  background: var(--primary-color);
+  text-align: center;
+  color: #fff;
+  border-radius: 0 5px 5px 0;
+  cursor: pointer;
+  font-size: 20px;
 }

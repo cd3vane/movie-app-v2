@@ -3,7 +3,7 @@ import { Link } from 'react-router-dom';
 import PropTypes from 'prop-types';
 import ProfileTop from './ProfileTop';
 import ProfileAbout from './ProfileAbout';
-import Lists from '../lists/Lists';
+import ProfileLists from './ProfileLists';
 import Reviews from '../reviews/UserReviews';
 import { connect } from 'react-redux';
 import Spinner from '../layout/Spinner';
@@ -40,7 +40,7 @@ const Profile = ({
             <ProfileAbout profile={profile} />
           </div>
           <div className='lists'>
-            <Lists />
+            <ProfileLists profile={profile} />
           </div>
           <div className='reviews'>
             <h3>Reviews</h3>
