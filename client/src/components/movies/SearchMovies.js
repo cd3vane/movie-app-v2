@@ -1,7 +1,7 @@
 import React, { Fragment, useState, useEffect } from 'react';
 import Spinner from '../layout/Spinner';
 import { connect } from 'react-redux';
-import MovieList from './MovieList';
+import ViewMovies from './ViewMovies';
 import { searchMovies } from '../../actions/movie';
 import PropTypes from 'prop-types';
 
@@ -48,7 +48,7 @@ const SearchMovies = ({ match, searchMovies, movie: { movies } }) => {
       ) : (
         <Fragment>
           <div className='search-results'>
-            <MovieList movies={movies} />
+            <ViewMovies movies={movies} />
           </div>
         </Fragment>
       )}

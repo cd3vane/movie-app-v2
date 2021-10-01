@@ -2,7 +2,7 @@ import React, { useEffect, Fragment } from 'react';
 import PropTypes from 'prop-types';
 import { Link } from 'react-router-dom';
 import Spinner from '../layout/Spinner';
-import MovieList from '../movies/MovieList';
+import ViewMovies from '../movies/ViewMovies';
 import { connect } from 'react-redux';
 import { getListById } from '../../actions/lists';
 
@@ -24,7 +24,7 @@ const List = ({ match, getListById, lists: { list, listsLoading } }) => {
 
           {list.movies.length > 0 ? (
             <Fragment>
-              <MovieList movies={list.movies} />
+              <ViewMovies movies={list.movies} />
             </Fragment>
           ) : (
             <Fragment>

@@ -13,7 +13,7 @@ const MovieButton = ({
 
   useEffect(() => {
     checkList();
-  }, [removeFromList, addToList]);
+  }, []);
 
   const checkList = () => {
     for (let i = 0; i < movies.length; i++) {
@@ -24,23 +24,31 @@ const MovieButton = ({
   };
   return (
     <Fragment>
-      {inList ? (
-        <button
-          type='button'
-          className='btn btn-light'
-          onClick={(e) => removeFromList(_id, id)}
-        >
-          Remove from {name}
-        </button>
-      ) : (
-        <button
-          type='button'
-          className='btn btn-light'
-          onClick={(e) => addToList(_id, id)}
-        >
-          Add to {name}
-        </button>
-      )}
+      <li className='button-item'>
+        {inList ? (
+          <button
+            type='button'
+            className='btn remove-btn btn-rounded'
+            onClick={(e) => {
+              removeFromList(_id, id);
+              checkList();
+            }}
+          >
+            Remove from {name}
+          </button>
+        ) : (
+          <button
+            type='button'
+            className='btn add-btn btn-rounded'
+            onClick={(e) => {
+              addToList(_id, id);
+              checkList();
+            }}
+          >
+            Add to {name}
+          </button>
+        )}
+      </li>
     </Fragment>
   );
 };

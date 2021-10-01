@@ -1,7 +1,7 @@
 import React, { Fragment, useEffect } from 'react';
 import Spinner from '../layout/Spinner';
 import { connect } from 'react-redux';
-import MovieList from './MovieList';
+import ViewMovies from './ViewMovies';
 import { getPopularMovies } from '../../actions/movie';
 import PropTypes from 'prop-types';
 
@@ -22,7 +22,7 @@ const PopularMovies = ({
         ) : (
           <Fragment>
             <div className='popular-movies'>
-              <MovieList movies={movies} />
+              <ViewMovies movies={movies} />
             </div>
           </Fragment>
         )}
