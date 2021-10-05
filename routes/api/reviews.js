@@ -24,7 +24,9 @@ router.post(
       const newReview = new Review({
         text: req.body.text,
         movieId: req.params.movie_id,
-        name: user.name,
+        poster_path: req.body.poster_path,
+        title: req.body.title,
+        name: user.username,
         avatar: user.avatar,
         user: req.user.id
       });
@@ -72,7 +74,7 @@ router.get('/movie/:movie_id', auth, async (req, res) => {
 });
 
 // @route  GET api/reviews/:review_id
-// @desc   Get all reviews by one user
+// @desc   Get review by id
 // @access Private
 router.get('/:review_id', auth, async (req, res) => {
   try {
@@ -188,16 +190,16 @@ router.post(
 
       const newComment = {
         text: req.body.text,
-        name: user.name,
+        name: user.username,
         avatar: user.avatar,
         user: req.user.id
       };
 
-      post.comments.unshift(newComment);
+      review.comments.unshift(newComment);
 
-      await post.save();
+      await review.save();
 
-      res.json(post.comments);
+      res.json(review.comments);
     } catch (err) {
       console.error(err.message);
       res.status(400).json('Server error');

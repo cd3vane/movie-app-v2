@@ -20,18 +20,11 @@ function listsReducer(state = initialState, action) {
     case UPDATE_LIST:
       return {
         ...state,
-        list: payload,
-        listsLoading: false
-      };
-    case REMOVE_FROM_LIST:
-      return {
-        ...state,
-        list: {
-          ...state.lists.listId,
-          movies: state.list.movies.filter(
-            (movie) => movie.movieId !== payload.movieId
-          )
-        },
+        lists: state.lists.map((list) =>
+          list._id === payload.listId
+            ? { ...list, movies: payload.movies }
+            : list
+        ),
         listsLoading: false
       };
     case GET_LISTS:

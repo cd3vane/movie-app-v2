@@ -8,7 +8,6 @@ import { getReviewsByMovie } from '../../actions/review';
 
 const MovieReviews = ({
   id,
-  match,
   getReviewsByMovie,
   review: { reviews, loading }
 }) => {

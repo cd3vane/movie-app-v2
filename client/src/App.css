@@ -1,7 +1,7 @@
 /* Global Styles */
 :root {
   --primary-color: #1ec39a;
-  --dark-color: #242e38;
+  --dark-color: #2a2b2a;
   --light-color: #eeeeee;
   --danger-color: #d62436;
   --success-color: #086b1f;
@@ -583,7 +583,7 @@ img {
   box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2);
   border-radius: 6px !important;
   transition: 0.3s;
-  background-color: #2a2b2a;
+  background-color: var(--dark-color);
   position: relative;
   align-items: center;
   grid-gap: 2rem;
@@ -597,7 +597,7 @@ img {
   box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2);
   border-radius: 6px !important;
   transition: 0.3s;
-  background-color: #2a2b2a;
+  background-color: var(--dark-color);
   display: grid;
   grid-template-columns: 2fr 4fr 2fr;
   align-items: center;
@@ -761,7 +761,7 @@ ul {
   box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2);
   border-radius: 6px !important;
   transition: 0.3s;
-  background-color: #2a2b2a;
+  background-color: var(--dark-color);
   display: grid;
   grid-template-columns: 2fr 2fr;
   align-items: center;
@@ -944,4 +944,16 @@ ul {
   color: var(--primary-color);
   font: bolder;
   white-space: nowrap;
+}
+
+#poster-image {
+  left: 0;
+  z-index: 0;
+}
+#user-image {
+  position: relative;
+  left: -25px;
+  bottom: 125px;
+  z-index: 1;
+  width: 20%;
 }

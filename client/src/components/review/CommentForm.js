@@ -3,7 +3,7 @@ import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
 import { addComment } from '../../actions/review';
 
-const CommentForm = ({ postId, addComment }) => {
+const CommentForm = ({ reviewId, addComment }) => {
   const [text, setText] = useState('');
 
   return (
@@ -15,7 +15,7 @@ const CommentForm = ({ postId, addComment }) => {
         className='form my-1'
         onSubmit={(e) => {
           e.preventDefault();
-          addComment(postId, { text });
+          addComment(reviewId, { text });
           setText('');
         }}
       >
@@ -23,7 +23,7 @@ const CommentForm = ({ postId, addComment }) => {
           name='text'
           cols='30'
           rows='5'
-          placeholder='Comment the post'
+          placeholder='Comment on this review'
           value={text}
           onChange={(e) => setText(e.target.value)}
           required

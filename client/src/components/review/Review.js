@@ -8,29 +8,44 @@ import { connect } from 'react-redux';
 import CommentForm from './CommentForm';
 import CommentItem from './CommentItem';
 
-const Review = ({ getReview, review: { review, loading }, match }) => {
+const Review = ({ getReview, review: { review, reviewLoading }, match }) => {
+  const IMGPATH = 'https://image.tmdb.org/t/p/w1280';
+
   useEffect(() => {
     getReview(match.params.review_id);
   }, [getReview, match.params.review_id]);
+
   return (
     <Fragment>
-      {review === null || loading ? (
+      {review === null || reviewLoading ? (
         <Spinner />
       ) : (
         <Fragment>
-          <Link to={`/${review.user}/reviews`} class='btn'>
+          <Link to={`/${review.user}/reviews`} className='btn'>
             Back To Reviews
           </Link>
-          <div class='review bg-white p-1 my-1'>
-            <div>
+          <div className='review bg-dark p-1 my-1'>
+            <div id='images-container'>
+              <Link to={`/movie-details/${review.movieId}`}>
+                <img
+                  src={`${IMGPATH}/${review.poster_path}`}
+                  alt='Poster Image'
+                  id='poster-image'
+                />
+              </Link>
               <Link to={`/profile/${review.user}`}>
-                <img class='round-img' src={review.avatar} alt='' />
-                <h4>{review.name}</h4>
+                <img
+                  src={review.avatar}
+                  alt='user Image'
+                  className='round-img'
+                  id='user-image'
+                />
               </Link>
             </div>
             <div>
-              <p class='my-1'>{review.text}</p>
-              <p class='review-date'>
+              <h3 className='text-dark'>{review.title}</h3>
+              <p className='my-1'>{review.text}</p>
+              <p className='review-date'>
                 Reviewed on <Moment format='YYYY/MM/DD'>{review.date}</Moment>
               </p>
             </div>

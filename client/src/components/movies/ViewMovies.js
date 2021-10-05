@@ -1,9 +1,8 @@
 import React, { useEffect, useState, Fragment } from 'react';
-import { Link } from 'react-router-dom';
 import ReactPaginate from 'react-paginate';
-import MovieCard from '../movie/MovieCard';
-import MovieRow from '../movie/MovieRow';
-import { FiltersBar } from './FiltersBar';
+import MovieTable from '../movieLayouts/MovieTable';
+import MovieGrid from '../movieLayouts/MovieGrid';
+// import { FiltersBar } from './FiltersBar';
 import queryString from 'query-string';
 import { useHistory, useLocation } from 'react-router-dom';
 import PropTypes from 'prop-types';
@@ -28,46 +27,15 @@ const ViewMovies = ({ movies }) => {
 
   return (
     <Fragment>
-      <FiltersBar toggleTable={toggleTable} />
+      {/* 
+      Experimental feature filter bar not fully implemented
+      <FiltersBar toggleTable={toggleTable} /> 
+      */}
       <div className='movie-results'>
         {isTable ? (
-          <Fragment>
-            {movies.length > 0 ? (
-              movies.map((movie, index) => (
-                <div key={index} className='column'>
-                  <Link to={`/movie-details/${movie.id}`}>
-                    <MovieRow key={movie.id} movie={movie} />
-                  </Link>
-                </div>
-              ))
-            ) : (
-              <Fragment>
-                <h4>
-                  No movies found, try searching for something or refreshing the
-                  page
-                </h4>
-              </Fragment>
-            )}
-          </Fragment>
+          <MovieTable movies={movies} />
         ) : (
-          <div className='row'>
-            {movies.length > 0 ? (
-              movies.map((movie, index) => (
-                <div key={index} className='column'>
-                  <Link to={`/movie-details/${movie.id}`}>
-                    <MovieCard key={movie.id} movie={movie} />
-                  </Link>
-                </div>
-              ))
-            ) : (
-              <Fragment>
-                <h4>
-                  No movies found, try searching for something or refreshing the
-                  page
-                </h4>
-              </Fragment>
-            )}
-          </div>
+          <MovieGrid movies={movies} />
         )}
         {movies.length > 19 && (
           <ReactPaginate

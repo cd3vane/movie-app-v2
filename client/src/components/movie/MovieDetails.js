@@ -43,13 +43,23 @@ const MovieDetails = ({
             </div>
             <div className='movie-details'>
               <h2 className='large text-primary'>Movie Details</h2>
+              {movie.vote_average !== 0 ? (
+                <p>
+                  Rated <i className='fa fa-star' aria-hidden='true'></i>{' '}
+                  {movie.vote_average} / 10 by {movie.vote_count} users.
+                </p>
+              ) : (
+                <p>Movie not yet rated</p>
+              )}
               <p>
-                Rated <i className='fa fa-star' aria-hidden='true'></i>{' '}
-                {movie.vote_average} / 10 by {movie.vote_count} users.
-              </p>
-              <p>
-                Released: {formatDate(movie.release_date)} <br />
-                Runtime: {movie.runtime} minutes
+                Release Date:{' '}
+                {movie.release_date ? (
+                  <>{formatDate(movie.release_date)}</>
+                ) : (
+                  <>TBD</>
+                )}
+                <br />
+                Runtime: {movie.runtime !== 0 ? <>{movie.runtime}</> : <>TBD</>}
               </p>
             </div>
             <div className='movie-genres'>

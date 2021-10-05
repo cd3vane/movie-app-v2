@@ -22,9 +22,6 @@ const UserReviews = ({
       <h1 className='large text-primary'>Reviews</h1>
       {reviews.length > 0 ? (
         <Fragment>
-          <Link to='/add-review' className='btn btn-light'>
-            Create New Review
-          </Link>
           <div className='reviews'>
             {reviews.map((review) => (
               <ReviewItem key={review._id} review={review} />

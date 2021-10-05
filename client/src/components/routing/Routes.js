@@ -40,7 +40,11 @@ const Routes = () => {
         />
         <Route exact path='/:user_id/reviews' component={UserReviews} />
         <Route exact path='/review/:review_id' component={Review} />
-        <PrivateRoute exact path='/add-review' component={ReviewForm} />
+        <PrivateRoute
+          exact
+          path='/add-review/:movie_id'
+          component={ReviewForm}
+        />
         <Route component={NotFound} />
       </Switch>
     </section>

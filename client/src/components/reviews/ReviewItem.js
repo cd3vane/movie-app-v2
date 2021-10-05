@@ -1,34 +1,58 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 import { Link } from 'react-router-dom';
-import Moment from 'react-moment';
+import formatDate from '../../utils/formatDate';
 import { connect } from 'react-redux';
 import { addLike, removeLike, deleteReview } from '../../actions/review';
 
 const ReviewItem = ({
-  review: { _id, text, name, avatar, user, likes, comments, date },
+  review: {
+    _id,
+    title,
+    poster_path,
+    text,
+    name,
+    movieId,
+    avatar,
+    user,
+    likes,
+    comments,
+    date
+  },
   auth,
   addLike,
   deleteReview,
   removeLike
 }) => {
+  const IMGPATH = 'https://image.tmdb.org/t/p/w1280';
+
   return (
-    <div className='review bg-white p-1 my-1'>
-      <div>
+    <div className='review bg-primary p-1 my-1'>
+      <div id='images-container'>
+        <Link to={`/movie-details/${movieId}`}>
+          <img
+            src={`${IMGPATH}/${poster_path}`}
+            alt='Poster Image'
+            id='poster-image'
+          />
+        </Link>
         <Link to={`/profile/${user}`}>
-          <img className='round-img' src={avatar} alt='' />
-          <h4>{name}</h4>
+          <img
+            src={avatar}
+            alt='user Image'
+            className='round-img'
+            id='user-image'
+          />
         </Link>
       </div>
       <div>
-        <p className='my-1'>{text}</p>
-        <p className='review-date'>
-          Reviewed on <Moment format='YYYY/MM/DD'>{date}</Moment>
-        </p>
+        <h3 className='text-dark'>{title}</h3>
+        <p className='my-1 text-dark'>{text}</p>
+        <p className='text-dark'>Reviewed on {formatDate(date)}</p>
         <button
           onClick={(e) => addLike(_id)}
           type='button'
-          className='btn btn-light'
+          className='btn btn-dark'
         >
           <i className='fas fa-thumbs-up'></i>{' '}
           <span>{likes.length > 0 && <span>{likes.length}</span>}</span>
@@ -36,11 +60,11 @@ const ReviewItem = ({
         <button
           onClick={(e) => removeLike(_id)}
           type='button'
-          className='btn btn-light'
+          className='btn btn-dark'
         >
           <i className='fas fa-thumbs-down'></i>
         </button>
-        <Link to={`/review/${_id}`} className='btn btn-primary'>
+        <Link to={`/review/${_id}`} className='btn btn-dark'>
           Discussion{' '}
           {comments.lenth > 0 && (
             <span className='comment-count'>{comments.length}</span>
