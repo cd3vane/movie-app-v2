@@ -1,6 +1,6 @@
 import React, { useEffect, useState, Fragment } from 'react';
 import ReactPaginate from 'react-paginate';
-import MovieTable from '../movieLayouts/MovieTable';
+// import MovieTable from '../movieLayouts/MovieTable';
 import MovieGrid from '../movieLayouts/MovieGrid';
 // import { FiltersBar } from './FiltersBar';
 import queryString from 'query-string';
@@ -8,7 +8,7 @@ import { useHistory, useLocation } from 'react-router-dom';
 import PropTypes from 'prop-types';
 
 const ViewMovies = ({ movies }) => {
-  const [isTable, toggleTable] = useState(false);
+  // const [isTable, toggleTable] = useState(false);
   const location = useLocation();
   const history = useHistory();
   const initialQueryString = queryString.parse(location.search);
@@ -32,11 +32,12 @@ const ViewMovies = ({ movies }) => {
       <FiltersBar toggleTable={toggleTable} /> 
       */}
       <div className='movie-results'>
-        {isTable ? (
+        {/* {isTable ? (
           <MovieTable movies={movies} />
         ) : (
           <MovieGrid movies={movies} />
-        )}
+        )} */}
+        <MovieGrid movies={movies} />
         {movies.length > 19 && (
           <ReactPaginate
             previousLabel={'previous'}

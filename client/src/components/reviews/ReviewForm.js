@@ -10,7 +10,8 @@ const ReviewForm = ({
   addReview,
   auth: { user },
   history,
-  movie: { movie, movieLoading }
+  movie: { movie, movieLoading },
+  getMovieById
 }) => {
   useEffect(() => {
     getMovieById(match.params.movie_id);

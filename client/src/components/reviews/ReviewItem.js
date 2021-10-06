@@ -32,17 +32,12 @@ const ReviewItem = ({
         <Link to={`/movie-details/${movieId}`}>
           <img
             src={`${IMGPATH}/${poster_path}`}
-            alt='Poster Image'
+            alt='Poster'
             id='poster-image'
           />
         </Link>
         <Link to={`/profile/${user}`}>
-          <img
-            src={avatar}
-            alt='user Image'
-            className='round-img'
-            id='user-image'
-          />
+          <img src={avatar} alt='user' className='round-img' id='user-image' />
         </Link>
       </div>
       <div>

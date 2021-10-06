@@ -11,7 +11,7 @@ const SearchMovies = ({ match, searchMovies, movie: { movies } }) => {
 
   useEffect(() => {
     searchMovies(text, match.params.page_number);
-  }, [searchMovies, match.params.page_number]);
+  }, [searchMovies, match.params.page_number, text]);
 
   const onSubmit = (e) => {
     e.preventDefault();

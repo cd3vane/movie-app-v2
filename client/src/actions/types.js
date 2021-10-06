@@ -25,7 +25,6 @@ export const GET_MOVIES = 'GET_MOVIES';
 export const GET_MOVIE = 'GET_MOVIE';
 export const CLEAR_MOVIES = 'CLEAR_MOVIES';
 export const UPDATE_LIST = 'UPDATE_LIST';
-export const REMOVE_FROM_LIST = 'REMOVE_FROM_LIST';
 export const LIST_ERROR = 'LIST_ERROR';
 export const GET_LISTS = 'GET_LISTS';
 export const GET_LIST = 'GET_LIST';

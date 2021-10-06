@@ -28,7 +28,7 @@ const MovieDetails = ({
           <Link to='/movies/1'>Back</Link>
           <div className='movie-container movie-grid'>
             <div className='movie-img'>
-              <img src={`${IMGPATH}/${movie.poster_path}`} />
+              <img src={`${IMGPATH}/${movie.poster_path}`} alt='poster' />
             </div>
             <div className='movie-about'>
               <h1 className='large text-primary'>{movie.title}</h1>

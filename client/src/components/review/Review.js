@@ -29,14 +29,14 @@ const Review = ({ getReview, review: { review, reviewLoading }, match }) => {
               <Link to={`/movie-details/${review.movieId}`}>
                 <img
                   src={`${IMGPATH}/${review.poster_path}`}
-                  alt='Poster Image'
+                  alt='Poster'
                   id='poster-image'
                 />
               </Link>
               <Link to={`/profile/${review.user}`}>
                 <img
                   src={review.avatar}
-                  alt='user Image'
+                  alt='user'
                   className='round-img'
                   id='user-image'
                 />

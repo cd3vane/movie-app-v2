@@ -10,11 +10,6 @@ const MovieButton = ({
   addToList
 }) => {
   const [inList, setInList] = useState(false);
-
-  useEffect(() => {
-    checkList();
-  }, []);
-
   const checkList = () => {
     for (let i = 0; i < movies.length; i++) {
       if (movies[i].title === title) {
@@ -22,6 +17,11 @@ const MovieButton = ({
       }
     }
   };
+
+  useEffect(() => {
+    checkList();
+  }, [checkList]);
+
   return (
     <Fragment>
       <li className='button-item'>

@@ -2,7 +2,6 @@ import { api, movieApi } from '../utils/api';
 import { setAlert } from './alert';
 import {
   UPDATE_LIST,
-  REMOVE_FROM_LIST,
   LIST_ERROR,
   GET_LISTS,
   GET_LIST,
@@ -144,7 +143,7 @@ export const removeFromList = (listId, movieId) => async (dispatch) => {
 
     await api.delete(`/lists/list/${listId}/${movieId}`);
     dispatch({
-      type: REMOVE_FROM_LIST,
+      type: UPDATE_LIST,
       payload: movieId
     });
 

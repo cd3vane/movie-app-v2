@@ -1,10 +1,4 @@
-import {
-  REMOVE_FROM_LIST,
-  UPDATE_LIST,
-  LIST_ERROR,
-  GET_LIST,
-  GET_LISTS
-} from '../actions/types';
+import { UPDATE_LIST, LIST_ERROR, GET_LIST, GET_LISTS } from '../actions/types';
 
 const initialState = {
   lists: [],
