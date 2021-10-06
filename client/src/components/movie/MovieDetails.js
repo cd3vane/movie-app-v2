@@ -1,33 +1,27 @@
-import React, { Fragment, useEffect, useState } from 'react';
+import React, { Fragment, useEffect } from 'react';
 import { connect } from 'react-redux';
 import { Link } from 'react-router-dom';
 import Spinner from '../layout/Spinner';
 import { getMovieById } from '../../actions/movie';
 import formatDate from '../../utils/formatDate';
-import MovieButtons from './MovieButtons';
 import MovieReviews from '../reviews/MovieReviews';
-import { getListsByUser } from '../../actions/lists';
 import PropTypes from 'prop-types';
+import MovieActions from './MovieActions';
 
 const MovieDetails = ({
   match,
-  auth: { user },
-  lists: { lists, listsLoading },
+  auth: { user, isAuthenticated },
   movie: { movie, movieLoading },
-  getMovieById,
-  getListsByUser
+  getMovieById
 }) => {
   useEffect(() => {
     getMovieById(match.params.id);
-    getListsByUser(user._id);
-  }, [getMovieById, getListsByUser, match.params.id, user._id, listsLoading]);
+  }, [getMovieById, match.params.id]);
   const IMGPATH = 'https://image.tmdb.org/t/p/w1280';
-
-  const [showButtons, toggleButtons] = useState(false);
 
   return (
     <Fragment>
-      {user === null || movie === null || movieLoading || listsLoading ? (
+      {movie === null || movieLoading ? (
         <Spinner />
       ) : (
         <Fragment>
@@ -72,36 +66,22 @@ const MovieDetails = ({
                 </span>
               </div>
             </div>
-            <div className='movie-actions'>
-              <div
-                className={
-                  showButtons
-                    ? 'button-list button-list--active btn-rounded'
-                    : 'button-list btn-rounded'
-                }
-              >
-                <div
-                  onClick={(e) => toggleButtons(!showButtons)}
-                  className='button-list__content btn-light'
-                >
-                  <i className='text-primary fa fa-list' aria-hidden='true'></i>
-                  <p className='text-primary'>Toggle List Actions</p>
+            {isAuthenticated ? (
+              <Fragment>
+                <MovieActions movie={movie} id={user._id} />
+                <div className='movie-reviews'>
+                  <MovieReviews id={movie.id} />
                 </div>
-                {showButtons && (
-                  <Fragment>
-                    {lists.length > 0 ? (
-                      <MovieButtons lists={lists} movie={movie} />
-                    ) : (
-                      <h4>Create a profile to add movies to lists</h4>
-                    )}
-                  </Fragment>
-                )}
-              </div>
-            </div>
-
-            <div className='movie-reviews'>
-              <MovieReviews id={movie.id} />
-            </div>
+              </Fragment>
+            ) : (
+              <Fragment>
+                <h3>
+                  <Link to='/'>Sign in</Link> or
+                  <Link to='/register'> Register </Link>
+                  to add this movie to a list or write a review{' '}
+                </h3>
+              </Fragment>
+            )}
           </div>
         </Fragment>
       )}
@@ -111,17 +91,15 @@ const MovieDetails = ({
 
 MovieDetails.propTypes = {
   movie: PropTypes.object.isRequired,
-  getMovieById: PropTypes.func.isRequired,
-  getListsByUser: PropTypes.func.isRequired
+  auth: PropTypes.object,
+  getMovieById: PropTypes.func.isRequired
 };
 
 const mapStateToProps = (state) => ({
   movie: state.movie,
-  auth: state.auth,
-  lists: state.lists
+  auth: state.auth
 });
 
 export default connect(mapStateToProps, {
-  getMovieById,
-  getListsByUser
+  getMovieById
 })(MovieDetails);

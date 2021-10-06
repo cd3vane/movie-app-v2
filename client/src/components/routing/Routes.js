@@ -33,11 +33,7 @@ const Routes = () => {
         <Route exact path='/search/:page_number' component={SearchMovies} />
         <Route exact path='/movie-details/:id' component={MovieDetails} />
         <PrivateRoute exact path='/:user_id/lists' component={MyLists} />
-        <PrivateRoute
-          exact
-          path='/:user_id/lists/:list_id/p/:page_number'
-          component={List}
-        />
+        <PrivateRoute exact path='/:user_id/lists/:list_id' component={List} />
         <Route exact path='/:user_id/reviews' component={UserReviews} />
         <Route exact path='/review/:review_id' component={Review} />
         <PrivateRoute

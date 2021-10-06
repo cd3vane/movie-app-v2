@@ -31,7 +31,7 @@ const MovieButton = ({
             className='btn remove-btn btn-rounded'
             onClick={(e) => {
               removeFromList(_id, id);
-              checkList();
+              setInList(!inList);
             }}
           >
             Remove from {name}
@@ -42,7 +42,7 @@ const MovieButton = ({
             className='btn add-btn btn-rounded'
             onClick={(e) => {
               addToList(_id, id);
-              checkList();
+              setInList(!inList);
             }}
           >
             Add to {name}
