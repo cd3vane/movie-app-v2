@@ -61,7 +61,7 @@ export const addToList = (listId, movieId) => async (dispatch) => {
 
     dispatch({
       type: UPDATE_LIST,
-      payload: { listId, movie: res.data }
+      payload: { listId, movies: res.data }
     });
 
     dispatch(setAlert('Movie Added to list'));

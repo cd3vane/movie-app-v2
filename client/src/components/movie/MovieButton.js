@@ -1,4 +1,4 @@
-import React, { Fragment, useEffect, useState } from 'react';
+import React, { Fragment, useCallback, useEffect, useState } from 'react';
 import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
 import { addToList, removeFromList } from '../../actions/lists';
@@ -10,13 +10,14 @@ const MovieButton = ({
   addToList
 }) => {
   const [inList, setInList] = useState(false);
-  const checkList = () => {
+  const checkList = useCallback(() => {
+    console.log('Checking...');
     for (let i = 0; i < movies.length; i++) {
       if (movies[i].title === title) {
         setInList(true);
       }
     }
-  };
+  }, [movies, title]);
 
   useEffect(() => {
     checkList();

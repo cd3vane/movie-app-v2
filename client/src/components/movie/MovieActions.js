@@ -31,7 +31,7 @@ const MovieActions = ({ id, lists: { lists }, movie, getListsByUser }) => {
             {lists && lists.length > 0 ? (
               <MovieButtons lists={lists} movie={movie} />
             ) : (
-              <h4>{id} Create a profile to add movies to lists</h4>
+              <h4>Create a profile to add movies to lists</h4>
             )}
           </Fragment>
         )}
