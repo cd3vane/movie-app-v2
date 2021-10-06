@@ -1,0 +1,4 @@
+{
+    "mongoURI": "mongodb+srv://cd3vane:Password1234@cluster0.vp1y6.mongodb.net/movie-database?retryWrites=true&w=majority",
+    "jwtSecret": "mysecrettoken1"
+}
