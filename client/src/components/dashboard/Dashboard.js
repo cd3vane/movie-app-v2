@@ -5,6 +5,7 @@ import PropTypes from 'prop-types';
 import DashboardActions from './DashboardActions';
 import { connect } from 'react-redux';
 import { deleteAccount, getCurrentProfile } from '../../actions/profile';
+import DashboardStats from './DashboardStats';
 
 const Dashboard = ({
   getCurrentProfile,
@@ -30,8 +31,8 @@ const Dashboard = ({
             <Fragment>
               <DashboardActions user={user} />
               <br />
-              <div className='watchlist'>
-                <h3>Lists</h3> <Link to='/account/lists'>View your lists</Link>
+              <div className='stats'>
+                <DashboardStats id={user._id} />
               </div>
               <div className='my-2'>
                 <button
