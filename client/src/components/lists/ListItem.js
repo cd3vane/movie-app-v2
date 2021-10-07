@@ -10,7 +10,7 @@ const ListItem = ({ list: { _id, name, movies } }) => {
         {movies.length > 0 ? (
           <Fragment>
             <h2>
-              <Link to={`/account/lists/${_id}`}>{name}</Link>
+              <Link to={`/lists/${_id}`}>{name}</Link>
             </h2>
 
             <ListPreview movies={movies} />

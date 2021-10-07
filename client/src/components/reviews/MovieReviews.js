@@ -22,7 +22,10 @@ const MovieReviews = ({
       <h1 className='large text-primary'>Reviews</h1>
       {reviews.length > 0 ? (
         <Fragment>
-          <Link to={`/add-review/${id}`} className='btn btn-light'>
+          <Link
+            to={`/add-review/${id}`}
+            className='btn btn-primary btn-rounded'
+          >
             Review this movie
           </Link>
           <div className='reviews'>
@@ -34,7 +37,10 @@ const MovieReviews = ({
       ) : (
         <Fragment>
           <h4>This movie does not have any reviews yet</h4>
-          <Link to={`/add-review/${id}`} className='btn btn-light'>
+          <Link
+            to={`/add-review/${id}`}
+            className='btn btn-primary btn-rounded'
+          >
             Add Review
           </Link>
         </Fragment>

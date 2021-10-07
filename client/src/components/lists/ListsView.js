@@ -18,8 +18,7 @@ const Lists = ({ lists }) => {
 };
 
 Lists.propTypes = {
-  lists: PropTypes.object.isRequired,
-  auth: PropTypes.object.isRequired
+  lists: PropTypes.object.isRequired
 };
 
 export default withRouter(Lists);

@@ -1,10 +1,10 @@
 import React, { Fragment } from 'react';
-import { connect } from 'react-redux';
 import { Link } from 'react-router-dom';
+import { connect } from 'react-redux';
 import PropTypes from 'prop-types';
 import { logout } from '../../actions/auth';
 
-const Navbar = ({ auth: { isAuthenticated, loading }, logout }) => {
+const Navbar = ({ auth: { isAuthenticated }, logout }) => {
   const authLinks = (
     <ul>
       <li>
@@ -28,6 +28,23 @@ const Navbar = ({ auth: { isAuthenticated, loading }, logout }) => {
     </ul>
   );
 
+  const guestLinks = (
+    <ul>
+      <li>
+        <Link to='/search/1'> Search</Link>
+      </li>
+      <li>
+        <Link to='/profiles'> Profiles </Link>
+      </li>
+      <li>
+        <Link to='/register'>Register</Link>
+      </li>
+      <li>
+        <Link to='/login'>Login</Link>
+      </li>
+    </ul>
+  );
+
   return (
     <nav className='navbar bg-dark'>
       <h1>
@@ -35,7 +52,7 @@ const Navbar = ({ auth: { isAuthenticated, loading }, logout }) => {
           <i className='fas fa-film'></i> MovieFilms
         </Link>
       </h1>
-      <Fragment>{authLinks}</Fragment>
+      <Fragment>{isAuthenticated ? authLinks : guestLinks}</Fragment>
     </nav>
   );
 };

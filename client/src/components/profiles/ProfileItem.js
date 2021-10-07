@@ -15,7 +15,10 @@ const ProfileItem = ({
       <div>
         <h2 className='text-primary'>{name}</h2>
         <p className='my-1'>{location && <span>{location}</span>}</p>
-        <Link to={`/profile/${_id}`} className='btn btn-primary btn-rounded'>
+        <Link
+          to={`/profile/${_id}`}
+          className='btn btn-primary btn-rounded no-wrap'
+        >
           View Profile
         </Link>
       </div>

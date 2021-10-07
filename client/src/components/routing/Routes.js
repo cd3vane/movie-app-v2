@@ -1,6 +1,7 @@
 import React from 'react';
 import { Route, Switch } from 'react-router-dom';
 import Register from '../auth/Register';
+import Login from '../auth/Login';
 import Alert from '../layout/Alert';
 import ProfileForm from '../profile-forms/ProfileForm';
 import Profiles from '../profiles/Profiles';
@@ -11,7 +12,7 @@ import SearchMovies from '../movies/SearchMovies';
 import NotFound from '../layout/NotFound';
 import PrivateRoute from './PrivateRoute';
 import MovieDetails from '../movie/MovieDetails';
-import MyLists from '../lists/MyLists';
+import UserLists from '../lists/UserLists';
 import List from '../list/List';
 import ListForm from '../list/ListForm';
 import UserReviews from '../reviews/UserReviews';
@@ -23,17 +24,18 @@ const Routes = () => {
     <section className='container'>
       <Alert />
       <Switch>
+        <Route exact path='/login' component={Login} />
         <Route exact path='/register' component={Register} />
         <Route exact path='/profiles' component={Profiles} />
         <PrivateRoute exact path='/account/dashboard' component={Dashboard} />
-        <PrivateRoute exact path='/profile/:id' component={Profile} />
+        <Route exact path='/profile/:id' component={Profile} />
         <PrivateRoute exact path='/update-profile' component={ProfileForm} />
         <PrivateRoute exact path='/create-list' component={ListForm} />
         <Route exact path='/movies/:pageNumber' component={PopularMovies} />
         <Route exact path='/search/:page_number' component={SearchMovies} />
         <Route exact path='/movie-details/:id' component={MovieDetails} />
-        <PrivateRoute exact path='/:user_id/lists' component={MyLists} />
-        <PrivateRoute exact path='/:user_id/lists/:list_id' component={List} />
+        <Route exact path='/:user_id/lists' component={UserLists} />
+        <Route exact path='/lists/:list_id' component={List} />
         <Route exact path='/:user_id/reviews' component={UserReviews} />
         <Route exact path='/review/:review_id' component={Review} />
         <PrivateRoute

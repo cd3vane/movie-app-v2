@@ -6,7 +6,7 @@ import { connect } from 'react-redux';
 import ListsView from './ListsView';
 import { getListsByUser } from '../../actions/lists';
 
-const MyLists = ({
+const UserLists = ({
   auth: { isAuthenticated, user, userLoading },
   getListsByUser,
   lists: { lists, listsLoading }
@@ -17,7 +17,7 @@ const MyLists = ({
 
   return (
     <Fragment>
-      <h1 className='large text-primary'>My Lists</h1>
+      <h1 className='large text-primary'>User Lists</h1>
       {!isAuthenticated || userLoading || listsLoading ? (
         <Spinner />
       ) : (
@@ -27,7 +27,7 @@ const MyLists = ({
   );
 };
 
-MyLists.propTypes = {
+UserLists.propTypes = {
   getListsByUser: PropTypes.func.isRequired,
   lists: PropTypes.object,
   auth: PropTypes.object.isRequired
@@ -39,5 +39,5 @@ const mapStateToProps = (state) => ({
 });
 
 export default connect(mapStateToProps, { getListsByUser })(
-  withRouter(MyLists)
+  withRouter(UserLists)
 );

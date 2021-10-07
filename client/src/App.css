@@ -598,6 +598,11 @@ img {
   margin-top: 1rem;
 }
 
+.no-wrap {
+  overflow: hidden;
+  white-space: nowrap;
+}
+
 .profile-list-container {
   box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2);
   border-radius: 6px !important;
@@ -733,72 +738,73 @@ ul {
   }
 }
 
-.movie-img {
-  grid-area: img;
-  background-color: #7ee9b700;
-  width: 50%;
-  margin: 0 auto;
-  padding-bottom: 30px;
-  padding-top: 30px;
-  max-width: 948px;
-}
+@media (min-width: 701px) {
+  .movie-container {
+    box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2);
+    border-radius: 6px !important;
+    transition: 0.3s;
+    background-color: var(--dark-color);
+    display: grid;
+    grid-template-columns: 2fr 2fr;
+    align-items: center;
+    grid-gap: 2rem;
+    padding: 3rem;
+    line-height: 1.8;
+    margin-bottom: 1rem;
+  }
 
-.movie-about {
-  grid-area: about;
-  margin-top: auto;
-  margin-bottom: auto;
-}
+  .movie-grid {
+    display: grid;
+    grid-template-areas:
+      'img about'
+      'details genres'
+      'actions actions'
+      'reviews reviews';
+    grid-gap: 1rem;
+  }
 
-.movie-details {
-  grid-area: details;
-  margin-top: auto;
-  margin-bottom: auto;
-}
+  .movie-results {
+    text-align: center;
+  }
 
-.movie-genres {
-  grid-area: genres;
-  text-align: right;
-  margin-top: auto;
-  margin-bottom: auto;
-}
+  .movie-reviews {
+    grid-area: reviews;
+    margin-top: auto;
+    margin-bottom: auto;
+  }
+  .movie-actions {
+    grid-area: actions;
+    margin-top: auto;
+    margin-bottom: auto;
+  }
+  .movie-img {
+    grid-area: img;
+    background-color: #7ee9b700;
+    width: 50%;
+    margin: 0 auto;
+    padding-bottom: 30px;
+    padding-top: 30px;
+    max-width: 948px;
+  }
 
-.movie-container {
-  box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2);
-  border-radius: 6px !important;
-  transition: 0.3s;
-  background-color: var(--dark-color);
-  display: grid;
-  grid-template-columns: 2fr 2fr;
-  align-items: center;
-  grid-gap: 2rem;
-  padding: 3rem;
-  line-height: 1.8;
-  margin-bottom: 1rem;
-}
+  .movie-about {
+    grid-area: about;
+    margin-top: auto;
+    margin-bottom: auto;
+  }
 
-.movie-grid {
-  display: grid;
-  grid-template-areas:
-    'img about'
-    'details genres'
-    'actions actions'
-    'reviews reviews';
-  grid-gap: 1rem;
-}
+  .movie-details {
+    grid-area: details;
+    margin-top: auto;
+    margin-bottom: auto;
+  }
 
-.movie-results {
-  text-align: center;
-}
-
-.movie-reviews {
-  grid-area: reviews;
-  margin-top: auto;
-  margin-bottom: auto;
-}
-.movie-actions {
-  grid-area: actions;
-  margin-top: auto;
-  margin-bottom: auto;
+  .movie-genres {
+    grid-area: genres;
+    text-align: right;
+    margin-top: auto;
+    margin-bottom: auto;
+  }
 }
 
 .search {
@@ -841,7 +847,7 @@ ul {
   position: relative;
   display: inline-block;
   min-height: 3rem;
-  width: 30%;
+  width: 70%;
   max-height: 12rem;
   margin: 0;
   padding: 0;

@@ -40,12 +40,10 @@ const List = ({ match, getListById, lists: { list, listsLoading } }) => {
 
 List.propTypes = {
   getListById: PropTypes.func.isRequired,
-  auth: PropTypes.object.isRequired,
   lists: PropTypes.object.isRequired
 };
 
 const mapStateToProps = (state) => ({
-  auth: state.auth,
   lists: state.lists
 });
 
