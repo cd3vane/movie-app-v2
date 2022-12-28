@@ -3,14 +3,14 @@ import ReactPaginate from 'react-paginate';
 // import MovieTable from '../movieLayouts/MovieTable';
 import MovieGrid from '../movieLayouts/MovieGrid';
 // import { FiltersBar } from './FiltersBar';
-import queryString from 'query-string';
-import { useHistory, useLocation } from 'react-router-dom';
+import queryString from 'querystring-es3';
+import { useNavigate, useLocation } from 'react-router-dom';
 import PropTypes from 'prop-types';
 
 const ViewMovies = ({ movies }) => {
   // const [isTable, toggleTable] = useState(false);
   const location = useLocation();
-  const history = useHistory();
+  const history = useNavigate();
   const initialQueryString = queryString.parse(location.search);
   const initialPageNumber = Number(initialQueryString.page) || 1;
 

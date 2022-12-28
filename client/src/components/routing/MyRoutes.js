@@ -1,5 +1,5 @@
 import React from 'react';
-import { Route, Switch } from 'react-router-dom';
+import { Route, Routes } from 'react-router-dom';
 import Register from '../auth/Register';
 import Login from '../auth/Login';
 import Alert from '../layout/Alert';
@@ -19,11 +19,11 @@ import UserReviews from '../reviews/UserReviews';
 import ReviewForm from '../reviews/ReviewForm';
 import Review from '../review/Review';
 
-const Routes = () => {
+const MyRoutes = () => {
   return (
     <section className='container'>
       <Alert />
-      <Switch>
+      <Routes>
         <Route exact path='/login' component={Login} />
         <Route exact path='/register' component={Register} />
         <Route exact path='/profiles' component={Profiles} />
@@ -44,9 +44,9 @@ const Routes = () => {
           component={ReviewForm}
         />
         <Route component={NotFound} />
-      </Switch>
+      </Routes>
     </section>
   );
 };
 
-export default Routes;
+export default MyRoutes;

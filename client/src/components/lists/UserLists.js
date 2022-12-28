@@ -1,6 +1,6 @@
 import React, { useEffect, Fragment } from 'react';
 import PropTypes from 'prop-types';
-import { withRouter } from 'react-router';
+import { useNavigate } from 'react-router';
 import Spinner from '../layout/Spinner';
 import { connect } from 'react-redux';
 import ListsView from './ListsView';
@@ -39,5 +39,5 @@ const mapStateToProps = (state) => ({
 });
 
 export default connect(mapStateToProps, { getListsByUser })(
-  withRouter(UserLists)
+  useNavigate(UserLists)
 );

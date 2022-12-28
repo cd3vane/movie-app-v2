@@ -1,5 +1,5 @@
 import React, { Fragment, useState } from 'react';
-import { Link, Redirect } from 'react-router-dom';
+import { Link, Navigate } from 'react-router-dom';
 import { connect } from 'react-redux';
 import { setAlert } from '../../actions/alert';
 import { register } from '../../actions/auth';
@@ -27,9 +27,9 @@ const Register = ({ setAlert, register, isAuthenticated }) => {
     }
   };
 
-  // Redirect if logged in
+  // Navigate if logged in
   if (isAuthenticated) {
-    return <Redirect to='/account/dashboard' />;
+    return <Navigate to='/account/dashboard' />;
   }
 
   return (

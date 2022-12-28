@@ -1,6 +1,6 @@
 import React, { useEffect, Fragment } from 'react';
 import PropTypes from 'prop-types';
-import { withRouter } from 'react-router';
+import { useNavigate } from 'react-router';
 import { connect } from 'react-redux';
 import { getListsByUser } from '../../actions/lists';
 import { getReviewsByUser } from '../../actions/review';
@@ -63,5 +63,5 @@ const mapStateToProps = (state) => ({
 });
 
 export default connect(mapStateToProps, { getListsByUser, getReviewsByUser })(
-  withRouter(DashboardStats)
+  useNavigate(DashboardStats)
 );
