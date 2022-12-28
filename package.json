@@ -30,6 +30,7 @@
     "jsonwebtoken": "^9.0.0",
     "mongoose": "^6.8.2",
     "normalize-url": "^8.0.0",
+    "querystring-es3": "^0.2.1",
     "react-paginate": "^8.1.4",
     "typeahead": "^0.2.2"
   },
