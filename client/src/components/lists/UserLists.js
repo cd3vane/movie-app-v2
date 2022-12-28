@@ -38,6 +38,4 @@ const mapStateToProps = (state) => ({
   auth: state.auth
 });
 
-export default connect(mapStateToProps, { getListsByUser })(
-  useNavigate(UserLists)
-);
+export default connect(mapStateToProps, { getListsByUser });

@@ -20,5 +20,3 @@ const Lists = ({ lists }) => {
 Lists.propTypes = {
   lists: PropTypes.object.isRequired
 };
-
-export default useNavigate(Lists);

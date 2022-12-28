@@ -62,6 +62,4 @@ const mapStateToProps = (state) => ({
   review: state.review
 });
 
-export default connect(mapStateToProps, { getListsByUser, getReviewsByUser })(
-  useNavigate(DashboardStats)
-);
+export default connect(mapStateToProps, { getListsByUser, getReviewsByUser });
