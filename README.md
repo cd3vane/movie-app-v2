@@ -16,7 +16,7 @@ https://user-images.githubusercontent.com/50383155/209984785-e905f30d-ae70-4d3c-
 - Ability to search for specific movies
 - Profile listings to see what other users are watching
 
-<img src="https://user-images.githubusercontent.com/50383155/209987726-46a2b92a-b418-4312-a80d-88e692d10614.JPG" alt="" width="500" height="800" />
+<img src="https://user-images.githubusercontent.com/50383155/209987726-46a2b92a-b418-4312-a80d-88e692d10614.JPG" alt="" width="600" height="700" />
 
 
 
