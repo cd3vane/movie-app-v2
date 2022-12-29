@@ -1,4 +1,13 @@
-# movie-app-v2
-[![wakatime](https://wakatime.com/badge/github/cd3vane/movie-app-v2.svg)](https://wakatime.com/badge/github/cd3vane/movie-app-v2)
+# MERN Stack Movie Social Media App
+### [Live App] https://movies.cd3vane.dev "Movie App")
 
-This app was bootstrapped using [Create React App](https://github.com/facebook/create-react-app)
+## Features
+- Create Account / Login functionality
+- Customizable profile
+- Profile initialized with lists for liked, watched, and watchlist movies
+- Ability to create new lists to hold movies
+- Integration with TMDB to view details of popular movies
+- Ability to search for specific movies
+- Profile listings to see what other users are watching
+
+
