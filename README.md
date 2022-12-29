@@ -1,5 +1,5 @@
 # MERN Stack Movie Social Media App
-### [Live App](https://movies.cd3vane.dev "Movie App")
+### [Live App](https://movie.cd3vane.dev "Movie App")
 
 ## Features
 - Create Account / Login functionality
